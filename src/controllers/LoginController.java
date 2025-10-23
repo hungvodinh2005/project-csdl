@@ -5,7 +5,7 @@
 package controllers;
 
 import java.sql.Connection;
-import Connect.connectMysql;
+import connection.connectMysql;
 import Models.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

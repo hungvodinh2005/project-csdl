@@ -1,13 +1,13 @@
-package Connect;
+package connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 public class connectMysql {
     private Connection connection;
-    private static final String URL = "jdbc:mysql://localhost:3306/data?useSSL=false&serverTimezone=UTC";
-    private String user="hungvodinh";
-    private String password="123456789hH@";
+    private static final String URL = "";
+    private String user="";
+    private String password="";
     public  Connection  getConnection() throws SQLException, ClassNotFoundException{
        try{
         Class.forName("com.mysql.cj.jdbc.Driver");
