@@ -1,34 +1,18 @@
 package models;
-
 public class Prescription {
-    private String prescriptionId;
-    private String patientId;
-    private String doctorId;
-    private String medicineId;
-    private int quantity;
+    private String prescriptionId;  // MaDon
+    private String doctorId;        // MaBacSi
+    private String dosage;          // LieuDung
+    private java.sql.Date date;     // NgayKeDon
 
     public Prescription() {}
 
-    public Prescription(String prescriptionId, String patientId, String doctorId, String medicineId, int quantity) {
+    public Prescription(String prescriptionId, String doctorId, String dosage, java.sql.Date date) {
         this.prescriptionId = prescriptionId;
-        this.patientId = patientId;
         this.doctorId = doctorId;
-        this.medicineId = medicineId;
-        this.quantity = quantity;
+        this.dosage = dosage;
+        this.date = date;
     }
 
-    public String getPrescriptionId() { return prescriptionId; }
-    public void setPrescriptionId(String prescriptionId) { this.prescriptionId = prescriptionId; }
-
-    public String getPatientId() { return patientId; }
-    public void setPatientId(String patientId) { this.patientId = patientId; }
-
-    public String getDoctorId() { return doctorId; }
-    public void setDoctorId(String doctorId) { this.doctorId = doctorId; }
-
-    public String getMedicineId() { return medicineId; }
-    public void setMedicineId(String medicineId) { this.medicineId = medicineId; }
-
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
+    // Getters & Setters
 }

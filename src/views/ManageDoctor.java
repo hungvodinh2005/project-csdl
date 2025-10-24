@@ -4,6 +4,13 @@
  */
 package views;
 
+import Controllers.DoctorController;
+import java.awt.Font;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import models.Doctor;
+
 /**
  *
  * @author DINHHUNG
@@ -14,7 +21,9 @@ public class ManageDoctor extends javax.swing.JPanel {
      * Creates new form ManageDoctor
      */
     public ManageDoctor() {
-        initComponents();
+         initComponents();
+        tableShow.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 24));
+         
     }
 
     /**
@@ -26,19 +35,427 @@ public class ManageDoctor extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        doctorSpecialty = new javax.swing.JTextField();
+        doctorId = new javax.swing.JTextField();
+        doctorCardId = new javax.swing.JTextField();
+        createID = new javax.swing.JButton();
+        addDoctor = new javax.swing.JButton();
+        editDoctor = new javax.swing.JButton();
+        deleteDoctor = new javax.swing.JButton();
+        showTable = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jButton6 = new javax.swing.JButton();
+        jTextField4 = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableShow = new javax.swing.JTable();
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        jLabel2.setText("Quản Lí Bác Sĩ");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(475, 475, 475)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel2)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(0, 204, 204));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel3.setText("Thao Tác");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
+        jLabel4.setText("CCCD");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
+        jLabel5.setText("Chuyên Khoa");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
+        jLabel6.setText("Mã Bác Sĩ");
+
+        doctorSpecialty.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
+
+        doctorId.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
+
+        doctorCardId.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+
+        createID.setBackground(new java.awt.Color(204, 255, 204));
+        createID.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        createID.setText("Tạo ID");
+        createID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createIDActionPerformed(evt);
+            }
+        });
+
+        addDoctor.setBackground(new java.awt.Color(204, 204, 255));
+        addDoctor.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        addDoctor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
+        addDoctor.setText("Thêm");
+        addDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDoctorActionPerformed(evt);
+            }
+        });
+
+        editDoctor.setBackground(new java.awt.Color(204, 204, 255));
+        editDoctor.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        editDoctor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit-removebg-preview.png"))); // NOI18N
+        editDoctor.setText("Sửa");
+        editDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editDoctorActionPerformed(evt);
+            }
+        });
+
+        deleteDoctor.setBackground(new java.awt.Color(204, 204, 255));
+        deleteDoctor.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        deleteDoctor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tải_xuống-removebg-preview.png"))); // NOI18N
+        deleteDoctor.setText("Xóa");
+        deleteDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteDoctorActionPerformed(evt);
+            }
+        });
+
+        showTable.setBackground(new java.awt.Color(204, 204, 255));
+        showTable.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        showTable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pngtree-display-icon-image_1344444-removebg-preview.png"))); // NOI18N
+        showTable.setText("Hiện Thị");
+        showTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showTableActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+
+        jButton6.setBackground(new java.awt.Color(204, 204, 255));
+        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jButton6.setText("Tìm Kiếm");
+
+        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(addDoctor)
+                        .addGap(39, 39, 39)
+                        .addComponent(editDoctor))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(doctorId, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(deleteDoctor)
+                        .addGap(18, 18, 18)
+                        .addComponent(showTable)
+                        .addGap(38, 38, 38)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(createID)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(doctorCardId, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(doctorSpecialty, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(doctorId, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(createID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(doctorCardId, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(doctorSpecialty, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addDoctor)
+                            .addComponent(editDoctor)
+                            .addComponent(deleteDoctor)
+                            .addComponent(showTable)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21))
+        );
+
+        jPanel4.setBackground(new java.awt.Color(0, 204, 204));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        jLabel7.setText("Danh Sách Bác Sĩ");
+
+        tableShow.setAutoCreateRowSorter(true);
+        tableShow.setBackground(new java.awt.Color(153, 255, 204));
+        tableShow.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        tableShow.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "MBS", "CCCD", "Họ Tên", "Chuyên Khoa"
+            }
+        ));
+        tableShow.setRowHeight(30);
+        tableShow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableShowMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tableShow);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(506, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(461, 461, 461))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jLabel7)
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoctorActionPerformed
+        String id=doctorId.getText().trim();
+        String cardId=doctorCardId.getText().trim();
+        String specialty=doctorSpecialty.getText().trim();
+        if (cardId.isEmpty() || specialty.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin bác sĩ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+        Doctor doctor=new Doctor(id,cardId,specialty);
+        DoctorController doctorControl=new DoctorController();
+        if (doctorControl.isCardIdExists(cardId)) {
+        JOptionPane.showMessageDialog(this, "CCCD này không tồn tại trong hệ thống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+        doctorControl.createDoctor(doctor);
+        JOptionPane.showMessageDialog(this, "Thêm bác sĩ thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        doctorId.setText("");
+        doctorCardId.setText("");
+        doctorSpecialty.setText("");
+        showTableActionPerformed(null);
+    }//GEN-LAST:event_addDoctorActionPerformed
+
+    private void editDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDoctorActionPerformed
+      String id = doctorId.getText().trim();
+    String cardId = doctorCardId.getText().trim();
+    String specialty = doctorSpecialty.getText().trim();
+
+    if (id.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập mã bác sĩ cần sửa!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    Doctor doctor = new Doctor(id, cardId, specialty);
+    DoctorController controller = new DoctorController();
+    if (controller.isCardIdExists(cardId)) {
+        JOptionPane.showMessageDialog(this, "CCCD này đã không tồn tại trong hệ thống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    controller.editDoctor(doctor);
+
+    JOptionPane.showMessageDialog(this, "Cập nhật thông tin bác sĩ thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+    doctorId.setText("");
+    doctorCardId.setText("");
+    doctorSpecialty.setText("");
+
+    showTableActionPerformed(null);
+    }//GEN-LAST:event_editDoctorActionPerformed
+
+    private void deleteDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDoctorActionPerformed
+        String id = doctorId.getText();
+    if(id.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Vui lòng nhập mã bác sĩ!");
+        return;
+    }
+    new DoctorController().setDoctorInactive(id);
+    JOptionPane.showMessageDialog(null, "Bác sĩ đã được chuyển sang trạng thái Nghỉ làm!");
+    
+    // Xóa hoặc refresh bảng
+    showTableActionPerformed(null);
+    }//GEN-LAST:event_deleteDoctorActionPerformed
+
+    private void showTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showTableActionPerformed
+            ArrayList<Doctor> doctors=new DoctorController().showAllDoctors();
+            DefaultTableModel model = (DefaultTableModel) tableShow.getModel();
+            model.setRowCount(0);
+            for (Doctor doc : doctors) {
+            model.addRow(new Object[]{
+                doc.getDoctorId(),
+                doc.getIdCard(),
+                new DoctorController().getDoctorNames(doc.getIdCard()),
+                doc.getSpecialty()
+            });
+        }
+    }//GEN-LAST:event_showTableActionPerformed
+
+    private void createIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createIDActionPerformed
+        String id=new DoctorController().generateDoctorId();
+        doctorId.setText(id);
+    }//GEN-LAST:event_createIDActionPerformed
+
+    private void tableShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableShowMouseClicked
+        int row = tableShow.getSelectedRow();
+        doctorId.setText(tableShow.getValueAt(row, 0).toString());
+        doctorCardId.setText(tableShow.getValueAt(row, 1).toString());
+        doctorSpecialty.setText(tableShow.getValueAt(row, 3).toString());
+    }//GEN-LAST:event_tableShowMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addDoctor;
+    private javax.swing.JButton createID;
+    private javax.swing.JButton deleteDoctor;
+    private javax.swing.JTextField doctorCardId;
+    private javax.swing.JTextField doctorId;
+    private javax.swing.JTextField doctorSpecialty;
+    private javax.swing.JButton editDoctor;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton showTable;
+    private javax.swing.JTable tableShow;
     // End of variables declaration//GEN-END:variables
 }

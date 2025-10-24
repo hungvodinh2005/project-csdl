@@ -1,16 +1,17 @@
 package models;
-
 public class Patient {
-    private String patientId;
-    private String idCard;
-    private String guardianId;
+    private String patientId;   // MaBenhNhan
+    private String idCard;      // CCCD
+    private String guardianId;  // NGH_CCCD
+    private String medicalHistory; // TienSuBenhAn
 
     public Patient() {}
 
-    public Patient(String patientId, String idCard, String guardianId) {
+    public Patient(String patientId, String idCard, String guardianId, String medicalHistory) {
         this.patientId = patientId;
         this.idCard = idCard;
         this.guardianId = guardianId;
+        this.medicalHistory = medicalHistory;
     }
 
     public String getPatientId() { return patientId; }
@@ -21,4 +22,7 @@ public class Patient {
 
     public String getGuardianId() { return guardianId; }
     public void setGuardianId(String guardianId) { this.guardianId = guardianId; }
+
+    public String getMedicalHistory() { return medicalHistory; }
+    public void setMedicalHistory(String medicalHistory) { this.medicalHistory = medicalHistory; }
 }

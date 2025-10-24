@@ -1,18 +1,15 @@
 package models;
-
 public class Doctor {
-    private String doctorId;
-    private String idCard;
-    private String specialty;
-    private String qualification;
+    private String doctorId;     // MaBacSi
+    private String idCard;       // CCCD (liên kết Person)
+    private String specialty;    // ChuyenKhoa
 
     public Doctor() {}
 
-    public Doctor(String doctorId, String idCard, String specialty, String qualification) {
+    public Doctor(String doctorId, String idCard, String specialty) {
         this.doctorId = doctorId;
         this.idCard = idCard;
         this.specialty = specialty;
-        this.qualification = qualification;
     }
 
     public String getDoctorId() { return doctorId; }
@@ -23,7 +20,4 @@ public class Doctor {
 
     public String getSpecialty() { return specialty; }
     public void setSpecialty(String specialty) { this.specialty = specialty; }
-
-    public String getQualification() { return qualification; }
-    public void setQualification(String qualification) { this.qualification = qualification; }
 }

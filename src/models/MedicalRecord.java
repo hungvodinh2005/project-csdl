@@ -1,34 +1,27 @@
 package models;
-
 public class MedicalRecord {
-    private String recordId;
-    private String patientId;
-    private String diagnosis;
-    private String createdDate;
-    private String status;
+    private String recordId;         // MaHoSo
+    private String patientId;        // MaBenhNhan
+    private java.sql.Date admissionDate; // NgayNhapVien
+    private java.sql.Date dischargeDate; // NgayXuatVien
+    private String diagnosis;        // ChanDoan
+    private String treatmentPlan;    // PhuongAnDieuTri
+    private String result;           // KetQua
 
     public MedicalRecord() {}
 
-    public MedicalRecord(String recordId, String patientId, String diagnosis, String createdDate, String status) {
+    public MedicalRecord(String recordId, String patientId, java.sql.Date admissionDate,
+                         java.sql.Date dischargeDate, String diagnosis,
+                         String treatmentPlan, String result) {
         this.recordId = recordId;
         this.patientId = patientId;
+        this.admissionDate = admissionDate;
+        this.dischargeDate = dischargeDate;
         this.diagnosis = diagnosis;
-        this.createdDate = createdDate;
-        this.status = status;
+        this.treatmentPlan = treatmentPlan;
+        this.result = result;
     }
 
-    public String getRecordId() { return recordId; }
-    public void setRecordId(String recordId) { this.recordId = recordId; }
-
-    public String getPatientId() { return patientId; }
-    public void setPatientId(String patientId) { this.patientId = patientId; }
-
-    public String getDiagnosis() { return diagnosis; }
-    public void setDiagnosis(String diagnosis) { this.diagnosis = diagnosis; }
-
-    public String getCreatedDate() { return createdDate; }
-    public void setCreatedDate(String createdDate) { this.createdDate = createdDate; }
-
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    // Getters & Setters
+    // ...
 }
