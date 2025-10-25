@@ -20,10 +20,8 @@
               <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jPanel4" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jPanel3" max="32767" attributes="0"/>
-                      <Component id="jPanel1" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jPanel3" max="32767" attributes="0"/>
+                  <Component id="jPanel1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -166,9 +164,9 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="doctorCardId" min="-2" pref="51" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                           <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="doctorSpecialty" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                          <Component id="doctorSpecialty" min="-2" pref="51" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="5" pref="5" max="-2" attributes="0"/>

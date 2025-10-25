@@ -3,15 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/project-csdl/src/views/ManageDoctor.java</file>
-            <file>file:/E:/project-csdl/src/controllers/DoctorController.java</file>
-            <file>file:/E:/project-csdl/src/views/Login.java</file>
-            <file>file:/E:/project-csdl/src/views/ManageUpdateStatus.java</file>
-            <file>file:/E:/project-csdl/src/views/Report.java</file>
-            <file>file:/E:/project-csdl/src/models/Doctor.java</file>
-            <file>file:/E:/project-csdl/src/views/Home.java</file>
-            <file>file:/E:/project-csdl/src/controllers/LoginController.java</file>
-            <file>file:/E:/project-csdl/src/views/ManageDiagnose.java</file>
+            <file>file:/C:/Users/phams/Desktop/code/Project/project-csdl/src/views/ManageMedicine.java</file>
+            <file>file:/C:/Users/phams/Desktop/code/Project/project-csdl/src/views/Home.java</file>
         </group>
     </open-files>
 </project-private>
