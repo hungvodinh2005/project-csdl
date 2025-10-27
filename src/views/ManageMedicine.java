@@ -8,14 +8,14 @@ package views;
  *
  * @author phams
  */
-public class ManageMedincine extends javax.swing.JFrame {
+public class ManageMedicine extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ManageMedincine.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ManageMedicine.class.getName());
 
     /**
      * Creates new form ManageMedincine
      */
-    public ManageMedincine() {
+    public ManageMedicine() {
         initComponents();
     }
 
@@ -419,7 +419,7 @@ public class ManageMedincine extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ManageMedincine().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ManageMedicine().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
