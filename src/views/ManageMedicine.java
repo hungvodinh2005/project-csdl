@@ -86,7 +86,6 @@ public class ManageMedicine extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(247, 250, 252));
         jLabel4.setText("Mã thuốc:");
 
-        txtLoai.setEditable(false);
         txtLoai.setBackground(new java.awt.Color(74, 85, 104));
         txtLoai.setForeground(new java.awt.Color(247, 250, 252));
         txtLoai.setText("Vui lòng nhập loại thuốc");
@@ -96,7 +95,6 @@ public class ManageMedicine extends javax.swing.JFrame {
             }
         });
 
-        txtMaDon.setEditable(false);
         txtMaDon.setBackground(new java.awt.Color(74, 85, 104));
         txtMaDon.setForeground(new java.awt.Color(247, 250, 252));
         txtMaDon.setText("Vui lòng nhập mã đơn");
@@ -106,7 +104,6 @@ public class ManageMedicine extends javax.swing.JFrame {
             }
         });
 
-        txtNsx.setEditable(false);
         txtNsx.setBackground(new java.awt.Color(74, 85, 104));
         txtNsx.setForeground(new java.awt.Color(247, 250, 252));
         txtNsx.setText("Vui lòng nhập nhà sản xuất");
@@ -116,7 +113,6 @@ public class ManageMedicine extends javax.swing.JFrame {
             }
         });
 
-        txtMaThuoc.setEditable(false);
         txtMaThuoc.setBackground(new java.awt.Color(74, 85, 104));
         txtMaThuoc.setForeground(new java.awt.Color(247, 250, 252));
         txtMaThuoc.setText("Mã thuốc được tạo tự động");
@@ -297,6 +293,7 @@ public class ManageMedicine extends javax.swing.JFrame {
         jLabel10.setText("Chọn thuốc:");
 
         jComboBox1.setBackground(new java.awt.Color(74, 85, 104));
+        jComboBox1.setEditable(true);
 
         jSpinner1.setToolTipText("");
 

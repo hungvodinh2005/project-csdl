@@ -197,7 +197,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtLoai">
                   <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="68" green="55" red="4a" type="rgb"/>
                     </Property>
@@ -212,7 +211,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtMaDon">
                   <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="68" green="55" red="4a" type="rgb"/>
                     </Property>
@@ -227,7 +225,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtNsx">
                   <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="68" green="55" red="4a" type="rgb"/>
                     </Property>
@@ -242,7 +239,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtMaThuoc">
                   <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="68" green="55" red="4a" type="rgb"/>
                     </Property>
@@ -541,6 +537,7 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="68" green="55" red="4a" type="rgb"/>
                     </Property>
+                    <Property name="editable" type="boolean" value="true"/>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="0"/>
                     </Property>
