@@ -131,4 +131,27 @@ public class ManageUpdateStatus extends JPanel {
         txtStatus.setText("");
         txtNote.setText("");
     }
+    public static void main(String[] args) {
+        // Chạy trên Event Dispatch Thread (EDT)
+        SwingUtilities.invokeLater(() -> {
+            // 1. Tạo một cửa sổ (JFrame)
+            JFrame frame = new JFrame("Test Giao Diện Theo Dõi Điều Trị");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            // 2. Tạo một đối tượng của Panel
+            ManageUpdateStatus mainPanel = new ManageUpdateStatus();
+
+            // 3. Thêm panel vào làm nội dung chính của cửa sổ
+            frame.setContentPane(mainPanel);
+
+            // 4. Tự động điều chỉnh kích thước
+            frame.pack();
+
+            // 5. Đặt ra giữa màn hình
+            frame.setLocationRelativeTo(null);
+
+            // 6. Hiển thị
+            frame.setVisible(true);
+        });
+    }
 }
