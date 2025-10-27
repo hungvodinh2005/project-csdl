@@ -236,6 +236,9 @@
               <Font name="Segoe UI" size="28" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doctorIdActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="doctorCardId">
           <Properties>
@@ -243,6 +246,9 @@
               <Font name="Segoe UI" size="22" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doctorCardIdActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="createID">
           <Properties>
@@ -376,6 +382,9 @@
                   <Font name="Segoe UI" size="22" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField4ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

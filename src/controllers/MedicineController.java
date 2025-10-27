@@ -6,10 +6,54 @@ import connection.connectMysql;
 import models.Medicine;
 
 public class MedicineController {
+    
+    //tim kiem thuoc
+    public boolean isCardIdExists(String cardId) {
+        boolean exists = false;
+        String sql = "SELECT COUNT(*) FROM loaithuoc WHERE idCard = ?";
+        try {
+            Connection conn = new connectMysql().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, cardId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                exists = rs.getInt(1) > 0; 
+            }
+
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return exists;
+    }
+    //hien thi toan bo thuoc
+    public ArrayList<Medicine> showAllMedicine() {
+        ArrayList<Medicine> list = new ArrayList<>();
+        String sql = "SELECT * FROM loaithuoc";
+        try {
+            Connection conn = new connectMysql().getConnection();
+            PreparedStatement show = conn.prepareStatement(sql);
+            ResultSet rs = show.executeQuery();
+            while (rs.next()) {
+                Medicine i = new Medicine();
+                i.setMedicineID(rs.getString("MaThuoc"));
+                i.setMedicineLoai(rs.getString("TenLoai"));
+                i.setMedicineMaDon(rs.getString("MaDon"));
+                i.setMedicineNsx(rs.getString("NhaSanXuat"));
+                list.add(i);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
     // ✅ Sinh mã thuốc tự động: M001, M002, ...
     public String generateMedicineID() {
-        String newId = "M001";
+        String newId = "LT001"; // Sửa prefix thành LT
         String sql = "SELECT MaThuoc FROM LoaiThuoc ORDER BY MaThuoc DESC LIMIT 1";
         try (Connection conn = new connectMysql().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -17,8 +61,9 @@ public class MedicineController {
 
             if (rs.next()) {
                 String lastId = rs.getString("MaThuoc");
-                int number = Integer.parseInt(lastId.substring(1)) + 1;
-                newId = String.format("M%03d", number);
+                // Lấy số từ 2 ký tự prefix (LT)
+                int number = Integer.parseInt(lastId.substring(2)) + 1; 
+                newId = String.format("LT%03d", number); // Sửa prefix thành LT
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -28,14 +73,15 @@ public class MedicineController {
 
     // ✅ Thêm thuốc mới
     public void createMedicine(Medicine med) {
-        String sql = "INSERT INTO LoaiThuoc (MaThuoc, TenThuoc, TenLoai, NhaSanXuat) VALUES (?, ?, ?, ?)";
+        // Sửa TenThuoc thành MaDon
+        String sql = "INSERT INTO LoaiThuoc (MaThuoc, MaDon, TenLoai, NhaSanXuat) VALUES (?, ?, ?, ?)";
         try (Connection conn = new connectMysql().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, med.getMedicineId());
-            stmt.setString(2, med.getMedicineName());
-            stmt.setString(3, med.getCategory());
-            stmt.setString(4, med.getManufacturer());
+            stmt.setString(1, med.getMedicineID());
+            stmt.setString(2, med.getMedicineLoai()); // Sửa thành MaDon
+            stmt.setString(3, med.getMedicineMaDon());
+            stmt.setString(4, med.getMedicineNsx());
             stmt.executeUpdate();
 
         } catch (Exception e) {
@@ -43,38 +89,17 @@ public class MedicineController {
         }
     }
 
-    // ✅ Lấy danh sách tất cả thuốc
-    public ArrayList<Medicine> getAllMedicines() {
-        ArrayList<Medicine> list = new ArrayList<>();
-        String sql = "SELECT * FROM LoaiThuoc";
-        try (Connection conn = new connectMysql().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                Medicine med = new Medicine();
-                med.setMedicineId(rs.getString("MaThuoc"));
-                med.setMedicineName(rs.getString("TenThuoc"));
-                med.setCategory(rs.getString("TenLoai"));
-                med.setManufacturer(rs.getString("NhaSanXuat"));
-                list.add(med);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
     // ✅ Sửa thông tin thuốc
     public void updateMedicine(Medicine med) {
-        String sql = "UPDATE LoaiThuoc SET TenThuoc = ?, TenLoai = ?, NhaSanXuat = ? WHERE MaThuoc = ?";
+        // Sửa TenThuoc thành MaDon
+        String sql = "UPDATE LoaiThuoc SET MaDon = ?, TenLoai = ?, NhaSanXuat = ? WHERE MaThuoc = ?";
         try (Connection conn = new connectMysql().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, med.getMedicineName());
-            stmt.setString(2, med.getCategory());
-            stmt.setString(3, med.getManufacturer());
-            stmt.setString(4, med.getMedicineId());
+            stmt.setString(1, med.getMedicineID()); // Sửa thành MaDon
+            stmt.setString(2, med.getMedicineLoai());
+            stmt.setString(3, med.getMedicineMaDon());
+            stmt.setString(4, med.getMedicineNsx());
             stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,30 +117,6 @@ public class MedicineController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    // ✅ Tìm thuốc theo tên
-    public ArrayList<Medicine> searchMedicineByName(String name) {
-        ArrayList<Medicine> list = new ArrayList<>();
-        String sql = "SELECT * FROM LoaiThuoc WHERE TenThuoc LIKE ?";
-        try (Connection conn = new connectMysql().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, "%" + name + "%");
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Medicine med = new Medicine();
-                med.setMedicineId(rs.getString("MaThuoc"));
-                med.setMedicineName(rs.getString("TenThuoc"));
-                med.setCategory(rs.getString("TenLoai"));
-                med.setManufacturer(rs.getString("NhaSanXuat"));
-                list.add(med);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
     }
 
     // ✅ Kiểm tra trùng mã thuốc

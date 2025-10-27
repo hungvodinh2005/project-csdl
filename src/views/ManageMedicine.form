@@ -93,16 +93,16 @@
                           </Group>
                           <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextField2" linkSize="3" alignment="0" min="-2" pref="408" max="-2" attributes="0"/>
-                              <Component id="jTextField3" linkSize="3" alignment="0" min="-2" pref="408" max="-2" attributes="0"/>
-                              <Component id="jTextField4" linkSize="3" alignment="0" min="-2" pref="408" max="-2" attributes="0"/>
-                              <Component id="jTextField1" linkSize="3" alignment="0" min="-2" pref="408" max="-2" attributes="0"/>
+                              <Component id="txtMaDon" linkSize="3" alignment="0" min="-2" pref="408" max="-2" attributes="0"/>
+                              <Component id="txtNsx" linkSize="3" alignment="0" min="-2" pref="408" max="-2" attributes="0"/>
+                              <Component id="txtMaThuoc" linkSize="3" alignment="0" min="-2" pref="408" max="-2" attributes="0"/>
+                              <Component id="txtLoai" linkSize="3" alignment="0" min="-2" pref="408" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButton1" min="-2" pref="84" max="-2" attributes="0"/>
-                              <Component id="jButton3" min="-2" pref="84" max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" pref="84" max="-2" attributes="0"/>
+                              <Component id="btnSua" min="-2" pref="84" max="-2" attributes="0"/>
+                              <Component id="btnThem" min="-2" pref="84" max="-2" attributes="0"/>
+                              <Component id="btnXoa" min="-2" pref="84" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="158" max="32767" attributes="0"/>
                       </Group>
@@ -115,31 +115,31 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jButton3" min="-2" pref="57" max="-2" attributes="0"/>
+                                  <Component id="btnThem" min="-2" pref="57" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButton1" min="-2" pref="57" max="-2" attributes="0"/>
+                                  <Component id="btnSua" min="-2" pref="57" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButton2" min="-2" pref="57" max="-2" attributes="0"/>
+                                  <Component id="btnXoa" min="-2" pref="57" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jTextField4" linkSize="5" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtMaThuoc" linkSize="5" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabel4" linkSize="4" alignment="0" pref="37" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel2" linkSize="4" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                                      <Component id="jTextField1" linkSize="5" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Component id="txtLoai" linkSize="5" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jTextField2" linkSize="5" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtMaDon" linkSize="5" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel1" linkSize="4" pref="35" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jLabel3" linkSize="4" pref="33" max="32767" attributes="0"/>
-                                      <Component id="jTextField3" linkSize="5" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtNsx" linkSize="5" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -159,7 +159,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="fc" green="fa" red="f7" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="T&#xea;n thu&#x1ed1;c:"/>
+                    <Property name="text" type="java.lang.String" value="M&#xe3; &#x111;&#x1a1;n:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel2">
@@ -170,7 +170,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="fc" green="fa" red="f7" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n v&#x1ecb; thu&#x1ed1;c:"/>
+                    <Property name="text" type="java.lang.String" value="T&#xea;n lo&#x1ea1;i:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel3">
@@ -181,7 +181,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="fc" green="fa" red="f7" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Gi&#xe1; ti&#x1ec1;n:"/>
+                    <Property name="text" type="java.lang.String" value="Nh&#xe0; s&#x1ea3;n xu&#x1ea5;t:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel4">
@@ -195,7 +195,7 @@
                     <Property name="text" type="java.lang.String" value="M&#xe3; thu&#x1ed1;c:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField1">
+                <Component class="javax.swing.JTextField" name="txtLoai">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -204,13 +204,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="fc" green="fa" red="f7" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Vui l&#xf2;ng nh&#x1ead;p &#x111;&#x1a1;n v&#x1ecb; thu&#x1ed1;c"/>
+                    <Property name="text" type="java.lang.String" value="Vui l&#xf2;ng nh&#x1ead;p lo&#x1ea1;i thu&#x1ed1;c"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtLoaiActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField2">
+                <Component class="javax.swing.JTextField" name="txtMaDon">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -219,13 +219,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="fc" green="fa" red="f7" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Vui l&#xf2;ng nh&#x1ead;p t&#xea;n thu&#x1ed1;c"/>
+                    <Property name="text" type="java.lang.String" value="Vui l&#xf2;ng nh&#x1ead;p m&#xe3; &#x111;&#x1a1;n"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMaDonActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField3">
+                <Component class="javax.swing.JTextField" name="txtNsx">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -234,13 +234,13 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="fc" green="fa" red="f7" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Vui l&#xf2;ng nh&#x1ead;p gi&#xe1; ti&#x1ec1;n"/>
+                    <Property name="text" type="java.lang.String" value="Vui l&#xf2;ng nh&#x1ead;p nh&#xe0; s&#x1ea3;n xu&#x1ea5;t"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField3ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNsxActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField4">
+                <Component class="javax.swing.JTextField" name="txtMaThuoc">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -253,10 +253,10 @@
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField4ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMaThuocActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton1">
+                <Component class="javax.swing.JButton" name="btnSua">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ac" green="b2" red="38" type="rgb"/>
@@ -269,8 +269,11 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSuaActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton2">
+                <Component class="javax.swing.JButton" name="btnXoa">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ac" green="b2" red="38" type="rgb"/>
@@ -283,8 +286,11 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton3">
+                <Component class="javax.swing.JButton" name="btnThem">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ac" green="b2" red="38" type="rgb"/>
@@ -297,6 +303,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemActionPerformed"/>
+                  </Events>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane2">
                   <AuxValues>
@@ -305,7 +314,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jTable2">
+                    <Component class="javax.swing.JTable" name="BangThuoc">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="68" green="55" red="4a" type="rgb"/>
@@ -316,9 +325,9 @@
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="4" rowCount="4">
                             <Column editable="true" title="M&#xe3; thu&#x1ed1;c" type="java.lang.String"/>
-                            <Column editable="true" title="&#x110;&#x1a1;n v&#x1ecb; thu&#x1ed1;c" type="java.lang.String"/>
-                            <Column editable="true" title="T&#xea;n thu&#x1ed1;c" type="java.lang.String"/>
-                            <Column editable="true" title="Gi&#xe1; ti&#x1ec1;n" type="java.lang.Long"/>
+                            <Column editable="true" title="T&#xea;n lo&#x1ea1;i" type="java.lang.String"/>
+                            <Column editable="true" title="M&#xe3; &#x111;&#x1a1;n" type="java.lang.String"/>
+                            <Column editable="true" title="Nh&#xe0; s&#x1ea3;n xu&#x1ea5;t" type="java.lang.String"/>
                           </Table>
                         </Property>
                       </Properties>
@@ -512,6 +521,9 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField7ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel10">
                   <Properties>

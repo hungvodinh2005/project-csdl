@@ -1,49 +1,47 @@
 package models;
 
-public class Medicine {
-    private String medicineId;
-    private String medicineName;
-    private String category;
-    private String manufacturer;
-
-    public Medicine() {}
-
-    public Medicine(String medicineId, String medicineName, String category, String manufacturer) {
-        this.medicineId = medicineId;
-        this.medicineName = medicineName;
-        this.category = category;
-        this.manufacturer = manufacturer;
+public class Medicine{
+    private String medicineID, medicineLoai, medicineNsx, medicineMaDon;
+    
+    public Medicine(){}
+    
+    public Medicine(String id,String loai,String madon,String nsx){
+        this.medicineID = id;
+        this.medicineLoai = loai;
+        this.medicineMaDon = madon;
+        this.medicineNsx = nsx;
     }
 
-    public String getMedicineId() {
-        return medicineId;
+    public String getMedicineID() {
+        return medicineID;
     }
 
-    public void setMedicineId(String medicineId) {
-        this.medicineId = medicineId;
+    public void setMedicineID(String medicineID) {
+        this.medicineID = medicineID;
     }
 
-    public String getMedicineName() {
-        return medicineName;
+    public String getMedicineLoai() {
+        return medicineLoai;
     }
 
-    public void setMedicineName(String medicineName) {
-        this.medicineName = medicineName;
+    public void setMedicineLoai(String medicineLoai) {
+        this.medicineLoai = medicineLoai;
     }
 
-    public String getCategory() {
-        return category;
+    public String getMedicineNsx() {
+        return medicineNsx;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setMedicineNsx(String medicineNsx) {
+        this.medicineNsx = medicineNsx;
     }
 
-    public String getManufacturer() {
-        return manufacturer;
+    public String getMedicineMaDon() {
+        return medicineMaDon;
     }
 
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
+    public void setMedicineMaDon(String medicineMaDon) {
+        this.medicineMaDon = medicineMaDon;
     }
+    
 }
