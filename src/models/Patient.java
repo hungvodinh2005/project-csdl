@@ -25,4 +25,15 @@ public class Patient {
 
     public String getMedicalHistory() { return medicalHistory; }
     public void setMedicalHistory(String medicalHistory) { this.medicalHistory = medicalHistory; }
+
+     private String hoTen; // Khai báo biến
+
+    public String getHoTen() { // Hàm get
+        return hoTen;
+    }
+
+    public void setHoTen(String hoTen) { // Hàm set
+        this.hoTen = hoTen;
+    }
+}
 }
