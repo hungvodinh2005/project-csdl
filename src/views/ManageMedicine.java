@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.Medicine;
+import models.Prescription;
+import controllers.PrescriptionController;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.ParseException;
 
 /**
  *
@@ -34,6 +39,9 @@ public class ManageMedicine extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnThem1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -56,14 +64,45 @@ public class ManageMedicine extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        txtMabenhnhan = new javax.swing.JTextField();
+        txtMabacsi = new javax.swing.JTextField();
+        txtMathuoc = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jSpinner1 = new javax.swing.JSpinner();
+        txtSoluong = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Bangdonthuoc = new javax.swing.JTable();
+        btnThemdon = new javax.swing.JButton();
+        txtSuathuoc = new javax.swing.JButton();
+        btnXoathuoc = new javax.swing.JButton();
+        txtNgay = new javax.swing.JTextField();
+
+        btnThem1.setBackground(new java.awt.Color(56, 178, 172));
+        btnThem1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnThem1.setForeground(new java.awt.Color(255, 255, 255));
+        btnThem1.setText("Thêm");
+        btnThem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThem1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(56, 178, 172));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Thêm");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setBackground(new java.awt.Color(56, 178, 172));
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Sửa");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -274,31 +313,28 @@ public class ManageMedicine extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Mã bệnh nhân:");
 
-        jTextField5.setBackground(new java.awt.Color(74, 85, 104));
-        jTextField5.setForeground(new java.awt.Color(255, 255, 255));
+        txtMabenhnhan.setBackground(new java.awt.Color(74, 85, 104));
+        txtMabenhnhan.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTextField6.setBackground(new java.awt.Color(74, 85, 104));
-        jTextField6.setForeground(new java.awt.Color(255, 255, 255));
+        txtMabacsi.setBackground(new java.awt.Color(74, 85, 104));
+        txtMabacsi.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTextField7.setBackground(new java.awt.Color(74, 85, 104));
-        jTextField7.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        txtMathuoc.setBackground(new java.awt.Color(74, 85, 104));
+        txtMathuoc.setForeground(new java.awt.Color(255, 255, 255));
+        txtMathuoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                txtMathuocActionPerformed(evt);
             }
         });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Chọn thuốc:");
+        jLabel10.setText("Ngày kê đơn:");
 
-        jComboBox1.setBackground(new java.awt.Color(74, 85, 104));
-        jComboBox1.setEditable(true);
+        txtSoluong.setToolTipText("");
 
-        jSpinner1.setToolTipText("");
-
-        jTable1.setBackground(new java.awt.Color(74, 85, 104));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Bangdonthuoc.setBackground(new java.awt.Color(74, 85, 104));
+        Bangdonthuoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -309,7 +345,42 @@ public class ManageMedicine extends javax.swing.JFrame {
                 "Mã đơn", "Mã bệnh nhân", "Mã bác sĩ", "Thuốc", "Số lượng", "Thành tiền"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Bangdonthuoc);
+
+        btnThemdon.setBackground(new java.awt.Color(56, 178, 172));
+        btnThemdon.setForeground(new java.awt.Color(255, 255, 255));
+        btnThemdon.setText("Thêm");
+        btnThemdon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemdonActionPerformed(evt);
+            }
+        });
+
+        txtSuathuoc.setBackground(new java.awt.Color(56, 178, 172));
+        txtSuathuoc.setForeground(new java.awt.Color(255, 255, 255));
+        txtSuathuoc.setText("Sửa");
+        txtSuathuoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSuathuocActionPerformed(evt);
+            }
+        });
+
+        btnXoathuoc.setBackground(new java.awt.Color(56, 178, 172));
+        btnXoathuoc.setForeground(new java.awt.Color(255, 255, 255));
+        btnXoathuoc.setText("Xóa");
+        btnXoathuoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoathuocActionPerformed(evt);
+            }
+        });
+
+        txtNgay.setBackground(new java.awt.Color(74, 85, 104));
+        txtNgay.setForeground(new java.awt.Color(255, 255, 255));
+        txtNgay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNgayActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -323,24 +394,30 @@ public class ManageMedicine extends javax.swing.JFrame {
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMabenhnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMathuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMabacsi, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(66, 66, 66)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(66, 66, 66)
+                        .addComponent(btnThemdon)
+                        .addGap(58, 58, 58)
+                        .addComponent(txtSuathuoc)
+                        .addGap(45, 45, 45)
+                        .addComponent(btnXoathuoc))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(23, 23, 23)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, 249, Short.MAX_VALUE)
-                            .addComponent(jSpinner1))))
+                            .addComponent(txtSoluong, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                            .addComponent(txtNgay))))
                 .addContainerGap(41, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField5, jTextField6, jTextField7});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtMabacsi, txtMabenhnhan, txtMathuoc});
 
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,17 +426,20 @@ public class ManageMedicine extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField7)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtMathuoc)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNgay))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMabenhnhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSoluong, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(17, 17, 17)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtMabacsi, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnThemdon)
+                            .addComponent(txtSuathuoc)
+                            .addComponent(btnXoathuoc)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
@@ -371,7 +451,7 @@ public class ManageMedicine extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextField5, jTextField6, jTextField7});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtMabacsi, txtMabenhnhan, txtMathuoc});
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -418,9 +498,9 @@ public class ManageMedicine extends javax.swing.JFrame {
         }
     } 
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void txtMathuocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMathuocActionPerformed
 
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_txtMathuocActionPerformed
 
     private void txtMaThuocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaThuocActionPerformed
 
@@ -440,7 +520,7 @@ public class ManageMedicine extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         MedicineController x = new MedicineController();
-        String mathuoc=x.generateMedicineID();
+        String mathuoc = x.generateMedicineID();
         String tenloai=txtLoai.getText().trim();
         String madon=txtMaDon.getText().trim();
         String nsx = txtNsx.getText().trim();
@@ -502,6 +582,105 @@ public class ManageMedicine extends javax.swing.JFrame {
         showTableActionPerformed(null);
     }//GEN-LAST:event_btnXoaActionPerformed
 
+    private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThem1ActionPerformed
+
+    private void btnThemdonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemdonActionPerformed
+        String madon = txtMathuoc.getText().trim();
+    String mabenhnhan = txtMabenhnhan.getText().trim();
+    String mabacsi = txtMabacsi.getText().trim();
+    String dateString = txtNgay.getText();
+
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); 
+    Date dateObject = null; 
+    String lieudung = txtSoluong.getValue().toString(); 
+
+    try {
+        dateObject = formatter.parse(dateString); 
+    } catch (ParseException e) {
+        System.out.println("Lỗi ép kiểu: " + e.getMessage());
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập ngày theo đúng định dạng dd/MM/yyyy", "Lỗi định dạng", JOptionPane.ERROR_MESSAGE);
+        return; 
+    }
+    if (madon.isEmpty() || mabacsi.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin thuốc!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    Prescription donthuoc = new Prescription(madon, mabenhnhan, mabacsi, dateObject, lieudung);
+    PrescriptionController m = new PrescriptionController();
+    m.createPrescription(donthuoc);
+    JOptionPane.showMessageDialog(this, "Thêm đơn thuốc thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    txtMathuoc.setText("");
+    txtMabenhnhan.setText("");
+    txtMabacsi.setText("");
+    txtNgay.setText("");
+    txtSoluong.setValue(0); 
+    showTableActionPerformed(null);
+    }//GEN-LAST:event_btnThemdonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtSuathuocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSuathuocActionPerformed
+        String madon = txtMaDon.getText().trim();
+        String mabenhnhan = txtMabenhnhan.getText().trim();
+        String mabacsi = txtMabacsi.getText().trim();
+        String dateString = txtNgay.getText().trim();
+        String lieudung = txtSoluong.getValue().toString();
+        Date dateObject = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            dateObject = formatter.parse(dateString);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập ngày theo đúng định dạng dd/MM/yyyy", "Lỗi định dạng", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (madon.isEmpty() || mabacsi.isEmpty() || mabenhnhan.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ Mã đơn, Mã bệnh nhân và Mã bác sĩ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Prescription donthuoc = new Prescription(madon, mabenhnhan, mabacsi, dateObject, lieudung);
+        PrescriptionController m = new PrescriptionController();
+        m.updatePrescription(donthuoc);
+        JOptionPane.showMessageDialog(this, "Cập nhật đơn thuốc thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        showTableActionPerformed(null);
+    }//GEN-LAST:event_txtSuathuocActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnXoathuocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoathuocActionPerformed
+        String madon = txtMaDon.getText().trim();
+        if (madon.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một đơn thuốc để xóa (Mã đơn không được trống).", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "Bạn có chắc chắn muốn xóa toàn bộ đơn thuốc '" + madon + "'?\n" +
+                "Hành động này không thể hoàn tác.",
+                "Xác nhận xóa",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE);
+        if (confirm == JOptionPane.YES_OPTION) {
+            PrescriptionController m = new PrescriptionController();
+            m.deletePrescription(madon);
+            JOptionPane.showMessageDialog(this, "Xóa đơn thuốc thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            txtMaDon.setText("");
+            txtMabenhnhan.setText("");
+            txtMabacsi.setText("");
+            txtNgay.setText("");
+            txtSoluong.setValue(0);
+            showTableActionPerformed(null);
+        }
+    }//GEN-LAST:event_btnXoathuocActionPerformed
+
+    private void txtNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNgayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNgayActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -529,10 +708,15 @@ public class ManageMedicine extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable BangThuoc;
+    private javax.swing.JTable Bangdonthuoc;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnThem1;
+    private javax.swing.JButton btnThemdon;
     private javax.swing.JButton btnXoa;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnXoathuoc;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -548,15 +732,16 @@ public class ManageMedicine extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField txtLoai;
     private javax.swing.JTextField txtMaDon;
     private javax.swing.JTextField txtMaThuoc;
+    private javax.swing.JTextField txtMabacsi;
+    private javax.swing.JTextField txtMabenhnhan;
+    private javax.swing.JTextField txtMathuoc;
+    private javax.swing.JTextField txtNgay;
     private javax.swing.JTextField txtNsx;
+    private javax.swing.JSpinner txtSoluong;
+    private javax.swing.JButton txtSuathuoc;
     // End of variables declaration//GEN-END:variables
 }

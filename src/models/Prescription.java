@@ -1,61 +1,74 @@
 package models;
 
-import java.sql.Date;
+import java.util.Date; // Dùng java.util.Date để lưu ngày
 
+/**
+ * Đây là lớp Model "ảo" (View Model), dùng để chứa dữ liệu 
+ * được kết hợp từ nhiều bảng, cụ thể là LichSuKham và DonThuoc.
+ */
 public class Prescription {
-    private String prescriptionId;  // MaDon
-    private String doctorId;        // MaBacSi
-    private String dosage;          // LieuDung
-    private Date date;              // NgayKeDon
 
-    public Prescription() {}
+    private String maDon;
+    private String maBenhNhan;
+    private String maBacSi;
+    private Date ngayKeDon; // Sẽ lấy từ NgayGioKham của bảng LichSuKham
+    private String lieuDung;
 
-    public Prescription(String prescriptionId, String doctorId, String dosage, Date date) {
-        this.prescriptionId = prescriptionId;
-        this.doctorId = doctorId;
-        this.dosage = dosage;
-        this.date = date;
+    // --- Constructors ---
+    
+    // Constructor rỗng
+    public Prescription() {
     }
 
-    public String getPrescriptionId() {
-        return prescriptionId;
+    // Constructor đầy đủ
+    public Prescription(String maDon, String maBenhNhan, String maBacSi, Date ngayKeDon, String lieuDung) {
+        this.maDon = maDon;
+        this.maBenhNhan = maBenhNhan;
+        this.maBacSi = maBacSi;
+        this.ngayKeDon = ngayKeDon;
+        this.lieuDung = lieuDung;
     }
 
-    public void setPrescriptionId(String prescriptionId) {
-        this.prescriptionId = prescriptionId;
+    // --- Getters and Setters ---
+    // (Bắt buộc phải có để truy cập và thay đổi dữ liệu)
+    
+    public String getMaDon() {
+        return maDon;
     }
 
-    public String getDoctorId() {
-        return doctorId;
+    public void setMaDon(String maDon) {
+        this.maDon = maDon;
     }
 
-    public void setDoctorId(String doctorId) {
-        this.doctorId = doctorId;
+    public String getMaBenhNhan() {
+        return maBenhNhan;
     }
 
-    public String getDosage() {
-        return dosage;
+    public void setMaBenhNhan(String maBenhNhan) {
+        this.maBenhNhan = maBenhNhan;
     }
 
-    public void setDosage(String dosage) {
-        this.dosage = dosage;
+    public String getMaBacSi() {
+        return maBacSi;
     }
 
-    public Date getDate() {
-        return date;
+    public void setMaBacSi(String maBacSi) {
+        this.maBacSi = maBacSi;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public Date getNgayKeDon() {
+        return ngayKeDon;
     }
 
-    @Override
-    public String toString() {
-        return "Prescription{" +
-                "prescriptionId='" + prescriptionId + '\'' +
-                ", doctorId='" + doctorId + '\'' +
-                ", dosage='" + dosage + '\'' +
-                ", date=" + date +
-                '}';
+    public void setNgayKeDon(Date ngayKeDon) {
+        this.ngayKeDon = ngayKeDon;
+    }
+
+    public String getLieuDung() {
+        return lieuDung;
+    }
+
+    public void setLieuDung(String lieuDung) {
+        this.lieuDung = lieuDung;
     }
 }
