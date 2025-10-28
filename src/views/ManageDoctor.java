@@ -98,8 +98,18 @@ public class ManageDoctor extends javax.swing.JPanel {
         doctorSpecialty.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
 
         doctorId.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
+        doctorId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doctorIdActionPerformed(evt);
+            }
+        });
 
         doctorCardId.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        doctorCardId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doctorCardIdActionPerformed(evt);
+            }
+        });
 
         createID.setBackground(new java.awt.Color(204, 255, 204));
         createID.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -157,6 +167,11 @@ public class ManageDoctor extends javax.swing.JPanel {
         jButton6.setText("Tìm Kiếm");
 
         jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -430,6 +445,18 @@ public class ManageDoctor extends javax.swing.JPanel {
         doctorCardId.setText(tableShow.getValueAt(row, 1).toString());
         doctorSpecialty.setText(tableShow.getValueAt(row, 3).toString());
     }//GEN-LAST:event_tableShowMouseClicked
+
+    private void doctorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_doctorIdActionPerformed
+
+    private void doctorCardIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorCardIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_doctorCardIdActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
