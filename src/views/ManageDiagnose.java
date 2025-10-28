@@ -60,6 +60,9 @@ public class ManageDiagnose extends javax.swing.JPanel {
         maBacSi = new javax.swing.JTextField();
         tenBN = new javax.swing.JTextField();
         search = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        phuongAn = new javax.swing.JTextArea();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -75,6 +78,8 @@ public class ManageDiagnose extends javax.swing.JPanel {
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
+
+        setBackground(new java.awt.Color(102, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 255));
 
@@ -135,6 +140,13 @@ public class ManageDiagnose extends javax.swing.JPanel {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel6.setText("Phương Án Điều Trị:");
+
+        phuongAn.setColumns(20);
+        phuongAn.setRows(5);
+        jScrollPane3.setViewportView(phuongAn);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -145,9 +157,11 @@ public class ManageDiagnose extends javax.swing.JPanel {
                         .addGap(89, 89, 89)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(192, 192, 192)
@@ -175,7 +189,7 @@ public class ManageDiagnose extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(diagnose)
-                .addGap(352, 352, 352))
+                .addGap(359, 359, 359))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,11 +214,16 @@ public class ManageDiagnose extends javax.swing.JPanel {
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(diagnose)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addGap(62, 62, 62))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -212,16 +231,16 @@ public class ManageDiagnose extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addGap(47, 47, 47)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(376, Short.MAX_VALUE))
+                .addContainerGap(411, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(31, 31, 31)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -238,23 +257,25 @@ public class ManageDiagnose extends javax.swing.JPanel {
         String Diagnose = this.chuanDoan.getText();
         LocalDate today = LocalDate.now();
         String patientID = this.maBN.getText();
-        MedicalRecord mr = new MedicalRecord(this.maHS, patientID, Diagnose, String.valueOf(today));
+        String PhuongAn = this.phuongAn.getText();
+        MedicalRecord mr = new MedicalRecord(this.maHS, patientID, Diagnose, String.valueOf(today), PhuongAn);
         mrc.insert(mr);//them ho so
-        
+        System.out.println("them ho so benh an thanh cong\n");
         //insert bang kham
         KhamController kc = new KhamController();
         kc.insert(this.maBn, this.maBS);
-        
+        System.out.println("them bang kham thanh cong\n");
         //insert bang lic su kham
         LocalDateTime now = LocalDateTime.now();//lay nay gio kham
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        
         String ngayGioKham = now.format(formatter);
         System.out.println("Định dạng: " + ngayGioKham);
         
         LichSuKhamController lsc = new LichSuKhamController();
-        String maDT = lsc.nextRecordID();//lay ma dt tieep theo
+        //String maDT = lsc.nextRecordID();//lay ma dt tieep theo
         
-        lsc.insert(new LicSuKham(this.maHS, this.maBn, maDT, ngayGioKham, this.maBS));//insert lic su kham;
+        lsc.insert(new LicSuKham(this.maHS, this.maBn, now, this.maBS));//insert lic su kham;
         
         
         System.out.println("then thanh cong tren layout");
@@ -288,6 +309,7 @@ public class ManageDiagnose extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -295,8 +317,10 @@ public class ManageDiagnose extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField maBN;
     private javax.swing.JTextField maBacSi;
+    private javax.swing.JTextArea phuongAn;
     private javax.swing.JButton search;
     private javax.swing.JTextField tenBN;
     // End of variables declaration//GEN-END:variables

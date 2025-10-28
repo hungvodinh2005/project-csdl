@@ -4,17 +4,20 @@
  */
 package models;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author CPS
  */
 public class LicSuKham {
-    private String recordID, patientID, LsID, time, doctorID;
-
-    public LicSuKham(String recordID, String patientID, String LsID, String time, String doctorID) {
+    private String recordID, patientID, LsID;
+    private LocalDateTime time;
+    private String doctorID;
+            
+    public LicSuKham(String recordID, String patientID, LocalDateTime time, String doctorID) {
         this.recordID = recordID;
         this.patientID = patientID;
-        this.LsID = LsID;
         this.time = time;
         this.doctorID = doctorID;
     }
@@ -43,11 +46,11 @@ public class LicSuKham {
         this.LsID = LsID;
     }
 
-    public String getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 
