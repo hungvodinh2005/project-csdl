@@ -60,7 +60,7 @@ public class Home {
         center.add(new ManageDiagnose(), "Diagnose");
         center.add(new ManageRecords(), "Records");
         center.add(new ManageUpdateStatus(), "Tracking");
-        center.add(new ManageMedicine(), "Medicine");
+        center.add(new ManageMedicine1(), "Medicine");
         center.add(new ManageService(), "Service");
         center.add(new Report(), "Report");
 
