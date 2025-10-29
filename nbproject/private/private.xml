@@ -3,29 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/views/ManageDiagnose.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/views/Login.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/views/ManageRecords.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/views/Report.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/models/User.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/models/Service.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/models/Prescription.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/models/Person.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/models/TreatmentTracking.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/models/Medicine.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/models/MedicalRecord.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/models/LicSuKham.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/controllers/LichSuKhamController.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/connection/connectMysql.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/controllers/PatientController.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/controllers/KhamController.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/controllers/MedicalRecordController.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/controllers/LoginController.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/views/ManageDoctor.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/views/Home.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/connection/JDBCUtil.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/models/Diagnose.java</file>
-            <file>file:/D:/git/project-csdl%20-%20Copy%20-%20Copy/src/models/Patient.java</file>
+            <file>file:/C:/Users/phams/Desktop/code/Project/project-csdl/src/views/ManageMedicine.java</file>
+            <file>file:/C:/Users/phams/Desktop/code/Project/project-csdl/src/controllers/MedicineController.java</file>
+            <file>file:/C:/Users/phams/Desktop/code/Project/project-csdl/src/controllers/PrescriptionController.java</file>
+            <file>file:/C:/Users/phams/Desktop/code/Project/project-csdl/src/views/ManageUpdateStatus1.java</file>
+            <file>file:/C:/Users/phams/Desktop/code/Project/project-csdl/src/views/ManageUpdateStatus.java</file>
         </group>
     </open-files>
 </project-private>
