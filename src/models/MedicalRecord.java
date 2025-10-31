@@ -9,12 +9,12 @@ public class MedicalRecord {
 
     public MedicalRecord() {}
 
-    public MedicalRecord(String recordId, String patientId, String diagnosis, String createdDate, String status) {
+    public MedicalRecord(String recordId, String patientId, String diagnosis, String createdDate, String phuongandieutri) {
         this.recordId = recordId;
         this.patientId = patientId;
         this.diagnosis = diagnosis;
         this.createdDate = createdDate;
-        this.status = status;
+        this.phuongandieutri = phuongandieutri;
     }
     
 
@@ -50,6 +50,7 @@ public class MedicalRecord {
         this.diagnosis = diagnosis;
         this.createdDate = createdDate;
     }
+    
     
     
 

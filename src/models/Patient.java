@@ -36,4 +36,3 @@ public class Patient {
         this.hoTen = hoTen;
     }
 }
-}

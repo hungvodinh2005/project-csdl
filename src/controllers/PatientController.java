@@ -9,6 +9,11 @@ import connection.connectMysql;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Patient;
+
+import connection.connectMysql; 
+import models.Patient;         
+import java.util.*;
+
 /**
  *
 //  * @author CPS
@@ -35,18 +40,6 @@ import models.Patient;
 //         return tenBN;
 //     }
 //     public static void main(String[] args) {
-package controllers;
-
-import connection.connectMysql; 
-import models.Patient;         
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Controller này xử lý logic cho Trang 2 (Quản lý Bệnh nhân)
@@ -212,6 +205,26 @@ public class PatientController {
         } catch (Exception e) { e.printStackTrace(); }
         return patientList;
     }
+    public String searchPatient(String maBN){
+         Connection con = JDBCUtil.getConnection();
+         Patient bn = new Patient();
+         String sql = "select * from Nguoi n where n.cccd in (select b.cccd from benhnhan b where b.MaBenhNhan = ?) ";
+         String tenBN="";
+         try {
+             PreparedStatement pst = con.prepareStatement(sql);
+             pst.setString(1, maBN);
+             ResultSet rs = pst.executeQuery();
+             rs.next();
+             tenBN = rs.getString("hoten");
+             System.out.println(tenBN);
+             rs.close();
+             pst.close();
+             con.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return tenBN;
+     }
 }
 
 

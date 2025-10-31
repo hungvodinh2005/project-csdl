@@ -39,13 +39,14 @@ public class MedicalRecordController {
     public int insert(MedicalRecord mr){
         int kq=0;
         Connection con = JDBCUtil.getConnection();
-        String sql="INSERT INTO HoSoBenhAn (MaHoSo, MaBenhNhan, NgayNhapVien, ChanDoan) VALUES(?, ?, ?, ?)";
+        String sql="INSERT INTO HoSoBenhAn (MaHoSo, MaBenhNhan, NgayNhapVien, ChanDoan, phuongandieutri) VALUES(?, ?, ?, ?, ?)";
         try {
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, mr.getRecordId());
             pst.setString(2, mr.getPatientId());
             pst.setString(4, mr.getDiagnosis());
             pst.setString(3, mr.getCreatedDate());
+            pst.setString(5, mr.getPhuongandieutri());
             kq=pst.executeUpdate();
             System.out.println("insert thanh cong");
             con.close();
