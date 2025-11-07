@@ -17,7 +17,7 @@ public class JDBCUtil {
         Connection con = null;
         String url = "jdbc:mysql://localhost:3306/quanlibenhan";
         String user = "root";
-        String pass = "Quang@0211";
+        String pass = "";
         try {
             con = DriverManager.getConnection(url, user, pass);
             System.out.println("ket noi thanh cong");
