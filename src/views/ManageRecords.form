@@ -60,7 +60,6 @@
                                   <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -70,7 +69,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
@@ -79,7 +78,7 @@
                       <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                       <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="13" max="32767" attributes="0"/>
+                  <EmptySpace pref="31" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -217,23 +216,23 @@
                                   <Component id="jLabel11" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Group type="102" alignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                       <Component id="jLabel6" linkSize="2" min="-2" pref="35" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="3" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
                                       <Component id="ngayNhap" linkSize="6" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Group type="102" alignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                       <Component id="jLabel9" linkSize="2" min="-2" pref="35" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="3" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
                                       <Component id="ngayXuat" linkSize="6" min="-2" max="-2" attributes="0"/>
                                   </Group>

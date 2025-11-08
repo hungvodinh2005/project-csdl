@@ -179,7 +179,7 @@ public class ManageDiagnose extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(diagnose)
-                .addGap(544, 544, 544))
+                .addGap(540, 540, 540))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {maBacSi, tenBN});
@@ -216,7 +216,7 @@ public class ManageDiagnose extends javax.swing.JPanel {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 29, 29)
+                .addGap(34, 34, 34)
                 .addComponent(diagnose, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -253,31 +253,20 @@ public class ManageDiagnose extends javax.swing.JPanel {
         
         MedicalRecordController mrc = new MedicalRecordController();
         this.maHS = mrc.nextRecordID();
+        System.out.println(this.maBS);
+        
         String Diagnose = this.chuanDoan.getText();
         LocalDate today = LocalDate.now();
         String patientID = this.maBN.getText();
         String PhuongAn = this.phuongAn.getText();
-        MedicalRecord mr = new MedicalRecord(this.maHS, patientID, Diagnose, String.valueOf(today), PhuongAn);
+
+        
+        MedicalRecord mr = new MedicalRecord(this.maHS, patientID, this.maBS, Diagnose, today, PhuongAn);
         mrc.insert(mr);//them ho so
         System.out.println("them ho so benh an thanh cong\n");
-        //insert bang kham
-        KhamController kc = new KhamController();
-        kc.insert(this.maBn, this.maBS);
-        System.out.println("them bang kham thanh cong\n");
-        //insert bang lic su kham
-        LocalDateTime now = LocalDateTime.now();//lay nay gio kham
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        
-        String ngayGioKham = now.format(formatter);
-        System.out.println("Định dạng: " + ngayGioKham);
-        
-        LichSuKhamController lsc = new LichSuKhamController();
-        //String maDT = lsc.nextRecordID();//lay ma dt tieep theo
-        
-        lsc.insert(new LicSuKham(this.maHS, this.maBn, now, this.maBS));//insert lic su kham;
-        
         
         System.out.println("then thanh cong tren layout");
+        
         this.maBn = this.maBS = this.maHS="";
     }//GEN-LAST:event_diagnoseActionPerformed
 

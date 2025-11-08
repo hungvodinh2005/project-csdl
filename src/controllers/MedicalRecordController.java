@@ -7,6 +7,7 @@ package controllers;
 import connection.JDBCUtil;
 import models.MedicalRecord;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,14 +40,15 @@ public class MedicalRecordController {
     public int insert(MedicalRecord mr){
         int kq=0;
         Connection con = JDBCUtil.getConnection();
-        String sql="INSERT INTO HoSoBenhAn (MaHoSo, MaBenhNhan, NgayNhapVien, ChanDoan, phuongandieutri) VALUES(?, ?, ?, ?, ?)";
+        String sql="INSERT INTO HoSoBenhAn (MaHoSo, MaBenhNhan, NgayNhapVien, ChuanDoan, phuongandieutri, mabacsi) VALUES(?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, mr.getRecordId());
             pst.setString(2, mr.getPatientId());
             pst.setString(4, mr.getDiagnosis());
-            pst.setString(3, mr.getCreatedDate());
+            pst.setDate(3, Date.valueOf(mr.getCreatedDate()));
             pst.setString(5, mr.getPhuongandieutri());
+            pst.setString(6, mr.getMabs());
             kq=pst.executeUpdate();
             System.out.println("insert thanh cong");
             con.close();
@@ -68,12 +70,13 @@ public class MedicalRecordController {
             ResultSet rs = pst.executeQuery();
             rs.next();
             String maBN = rs.getString("mabenhnhan");
-            String ngayvao = rs.getString("ngaynhapvien");
-            String ngayra = rs.getString("ngayxuatvien");
-            String chuandoan = rs.getString("chandoan");
+            LocalDate ngayvao = rs.getDate("ngaynhapvien").toLocalDate();
+            LocalDate ngayra = rs.getDate("ngayxuatvien").toLocalDate();
+            String chuandoan = rs.getString("chuandoan");
             String dieutri = rs.getString("phuongandieutri");
             String ketqua = rs.getString("ketqua");
-            mr=new MedicalRecord(maHS, maBN, chuandoan, ngayvao, ngayra, ketqua, dieutri);
+            String mabs = rs.getString("mabacsi");
+            mr=new MedicalRecord(maHS, maBN,mabs, chuandoan, ngayvao, ngayra, ketqua, dieutri);
             con.close();
             rs.close();
             pst.close();

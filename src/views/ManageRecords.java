@@ -196,7 +196,7 @@ public class ManageRecords extends javax.swing.JPanel {
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11))
                         .addGap(8, 8, 8)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -204,7 +204,7 @@ public class ManageRecords extends javax.swing.JPanel {
                                 .addGap(3, 3, 3)
                                 .addComponent(ngayNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(4, 4, 4)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -344,14 +344,13 @@ public class ManageRecords extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(93, 93, 93)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(15, 15, 15)))
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -359,7 +358,7 @@ public class ManageRecords extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -376,21 +375,21 @@ public class ManageRecords extends javax.swing.JPanel {
 
     private void tracuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tracuuActionPerformed
         // TODO add your handling code here:
-        String maHS = this.mahs.getText();
-        MedicalRecordController mrc = new MedicalRecordController();
-        MedicalRecord mr = mrc.selectByMahs(maHS);
-        PatientController pc = new PatientController();
-        this.maBN.setText(mr.getPatientId());
-        this.tenBN.setText(pc.searchPatient(mr.getPatientId()));
-        this.ngayNhap.setText(mr.getCreatedDate());
-        if(mr.getNgayxuat()==null){
-            this.ngayXuat.setText("Chưa xuất viện");
-        }
-        else this.ngayXuat.setText(mr.getNgayxuat());
-        this.chuanDoan.setText(mr.getDiagnosis());
-        this.dieuTri.setText(mr.getPhuongandieutri());
-        this.ketQua.setText(mr.getStatus());
-        System.out.println("hien thi thanh cong");
+//        String maHS = this.mahs.getText();
+//        MedicalRecordController mrc = new MedicalRecordController();
+//        MedicalRecord mr = mrc.selectByMahs(maHS);
+//        PatientController pc = new PatientController();
+//        this.maBN.setText(mr.getPatientId());
+//        this.tenBN.setText(pc.searchPatient(mr.getPatientId()));
+//        this.ngayNhap.setText(mr.getCreatedDate());
+//        if(mr.getNgayxuat()==null){
+//            this.ngayXuat.setText("Chưa xuất viện");
+//        }
+//        else this.ngayXuat.setText(mr.getNgayxuat());
+//        this.chuanDoan.setText(mr.getDiagnosis());
+//        this.dieuTri.setText(mr.getPhuongandieutri());
+//        this.ketQua.setText(mr.getStatus());
+//        System.out.println("hien thi thanh cong");
     }//GEN-LAST:event_tracuuActionPerformed
 
     private void maBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maBNActionPerformed
