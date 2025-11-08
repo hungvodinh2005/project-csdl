@@ -105,6 +105,7 @@ public class Login extends javax.swing.JFrame {
         String taikhoan=user.getText();
         String matkhau=password.getText();
         LoginController a=new LoginController(); 
+        
         if(true){
             System.out.println(a.objectUser(taikhoan, matkhau).getId());
             Home home = new Home(a.objectUser(taikhoan, matkhau));

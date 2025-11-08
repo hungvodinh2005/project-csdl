@@ -17,7 +17,11 @@ public class JDBCUtil {
         Connection con = null;
         String url = "jdbc:mysql://localhost:3306/csdl";
         String user = "root";
+<<<<<<< HEAD
         String pass = "Son0945@";
+=======
+        String pass = "";
+>>>>>>> da8df0f42885cbec4746a1687e1a0d991465e400
         try {
             con = DriverManager.getConnection(url, user, pass);
             System.out.println("ket noi thanh cong");

@@ -1,0 +1,3 @@
+/nbproject/private/
+/build/
+-e "/build/\n/nbproject/private/\n*.class" 
