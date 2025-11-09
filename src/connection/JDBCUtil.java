@@ -15,9 +15,9 @@ import java.util.logging.Logger;
 public class JDBCUtil {
     public static Connection getConnection(){
         Connection con = null;
-        String url = "jdbc:mysql://localhost:3306/quanlibenhan";
+        String url = "jdbc:mysql://localhost:3306/csdl";
         String user = "root";
-        String pass = "";
+        String pass = "Son0945@";
         try {
             con = DriverManager.getConnection(url, user, pass);
             System.out.println("ket noi thanh cong");

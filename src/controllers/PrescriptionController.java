@@ -1,252 +1,372 @@
 package controllers;
 
-import java.sql.*;
-import java.util.*;
-import connection.connectMysql;
+import connection.JDBCUtil; 
 import models.Prescription;
-import java.util.Date;
+import models.Thuoc;
+import models.ChiTietDonThuoc;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class PrescriptionController {
-    
-    //tạo đơn thuốc mới và lịch sử khám mới
-    public void createPrescription(Prescription p) {
-        
-        // 2 câu lệnh SQL cho 2 bảng
-        String sqlDonThuoc = "INSERT INTO DonThuoc (MaDon, MaBacSi, LieuDung, NgayKeDon) VALUES (?, ?, ?, ?)";
-        String sqlLichSuKham = "INSERT INTO LichSuKham (MaDon, MaBenhNhan, MaBacSi, NgayGioKham) VALUES (?, ?, ?, ?)";
-        
-        Connection conn = null;
-        PreparedStatement stmtDonThuoc = null;
-        PreparedStatement stmtLichSuKham = null;
 
+    // Thêm một đơn thuốc mới vào CSDL.
+    public int insert(Prescription prescription) {
+        int kq = 0;
+        Connection con = JDBCUtil.getConnection(); 
+        
+        // SỬA LẠI: Bỏ MaBacSi. Tên bảng và cột dùng chữ thường
+        String sql = "INSERT INTO donthuoc (MaDon, MaHoSo, ngaykedon) VALUES (?, ?, ?)";
+
+        PreparedStatement pst = null;
         try {
-            // 1. Lấy kết nối
-            conn = new connectMysql().getConnection();
+            pst = con.prepareStatement(sql);
             
-            // --- BẮT ĐẦU TRANSACTION ---
-            conn.setAutoCommit(false); 
-            
-            // --- 2. Thêm vào bảng DonThuoc ---
-            stmtDonThuoc = conn.prepareStatement(sqlDonThuoc);
-            stmtDonThuoc.setString(1, p.getMaDon());
-            stmtDonThuoc.setString(2, p.getMaBacSi());
-            stmtDonThuoc.setString(3, p.getLieuDung());
-            // Chuyển java.util.Date sang java.sql.Timestamp
-            stmtDonThuoc.setTimestamp(4, new java.sql.Timestamp(p.getNgayKeDon().getTime())); 
-            stmtDonThuoc.executeUpdate();
+            // SỬA LẠI: Chỉ set 3 tham số
+            pst.setString(1, prescription.getMaDon());
+            pst.setString(2, prescription.getMaHoSo());
+            pst.setTimestamp(3, new Timestamp(prescription.getNgayKeDon().getTime()));
+            // Đã xóa dòng pst.setString(4, ...)
 
-            // --- 3. Thêm vào bảng LichSuKham ---
-            stmtLichSuKham = conn.prepareStatement(sqlLichSuKham);
-            stmtLichSuKham.setString(1, p.getMaDon());
-            stmtLichSuKham.setString(2, p.getMaBenhNhan());
-            stmtLichSuKham.setString(3, p.getMaBacSi());
-            // Dùng cùng một ngày (vì bạn nói NgayKeDon = NgayGioKham)
-            stmtLichSuKham.setTimestamp(4, new java.sql.Timestamp(p.getNgayKeDon().getTime()));
-            stmtLichSuKham.executeUpdate();
+            kq = pst.executeUpdate();
 
-            // --- KẾT THÚC TRANSACTION (COMMIT) ---
-            conn.commit(); 
-            System.out.println("Thêm đơn thuốc thành công!");
-            
-        } catch (Exception e) {
-            // --- GẶP LỖI: HỦY BỎ TRANSACTION (ROLLBACK) ---
-            try {
-                if (conn != null) {
-                    conn.rollback();
-                    System.out.println("Transaction đã được rollback.");
-                }
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(PrescriptionController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            // --- 4. Dọn dẹp tài nguyên ---
             try {
-                if (stmtDonThuoc != null) stmtDonThuoc.close();
-                if (stmtLichSuKham != null) stmtLichSuKham.close();
-                if (conn != null) {
-                    conn.setAutoCommit(true); // Trả lại trạng thái tự động commit
-                    conn.close();
-                }
+                if (pst != null) pst.close();
+                if (con != null) con.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                Logger.getLogger(PrescriptionController.class.getName()).log(Level.SEVERE, null, e);
             }
         }
+        return kq;
     }
 
-    /**
-     * Lấy danh sách TẤT CẢ đơn thuốc (đã JOIN)
-     * với các thông tin bạn yêu cầu.
-     */
-    public ArrayList<Prescription> getDanhSachDonThuocView() {
-        ArrayList<Prescription> list = new ArrayList<>();
+    // Tạo MaDon tiếp theo dựa trên MaDon cuối cùng trong CSDL.
+    public String nextPrescriptionID() {
+        String nextID = "";
+        Connection con = JDBCUtil.getConnection();
         
-        // Câu lệnh SQL JOIN 2 bảng
-        // Lấy NgayGioKham từ LichSuKham làm NgayKeDon
-        String sql = "SELECT dt.MaDon, ls.MaBenhNhan, ls.MaBacSi, dt.NgayKeDon, dt.LieuDung " +
-                     "FROM DonThuoc dt " +
-                     "JOIN LichSuKham ls ON dt.MaDon = ls.MaDon";
+        // SỬA LẠI: Tên bảng chữ thường
+        String sql = "SELECT MaDon FROM donthuoc ORDER BY MaDon DESC LIMIT 1";
+        
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
 
-        try (Connection conn = new connectMysql().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                String lastID = rs.getString("MaDon"); 
+                int ma = Integer.parseInt(lastID.substring(2)); 
+                nextID = String.format("D%02d", ma + 1);
+            } else {
+                nextID = "D01";
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (NumberFormatException e) {
+            Logger.getLogger(PrescriptionController.class.getName()).log(Level.SEVERE, "Lỗi định dạng MaDon", e);
+            throw new RuntimeException("Lỗi định dạng ID trong CSDL", e);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pst != null) pst.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return nextID;
+    }
+    
+    // Lấy tất cả đơn thuốc (SỬA LẠI HOÀN TOÀN)
+    public java.util.List<Prescription> getAllPrescriptions() {
+        java.util.List<Prescription> prescriptionList = new java.util.ArrayList<>();
+        Connection con = JDBCUtil.getConnection();
+        
+        // SỬA LẠI: Dùng JOIN và tên chữ thường
+        String sql = "SELECT dt.MaDon, dt.MaHoSo, dt.ngaykedon, hs.mabacsi " +
+                     "FROM donthuoc dt " +
+                     "JOIN hosobenhan hs ON dt.MaHoSo = hs.MaHoSo " +
+                     "ORDER BY dt.ngaykedon DESC";
+
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
 
             while (rs.next()) {
-                String maDon = rs.getString("MaDon");
-                String maBenhNhan = rs.getString("MaBenhNhan");
-                String maBacSi = rs.getString("MaBacSi");
-                Date ngayKeDon = rs.getTimestamp("NgayKeDon"); // Lấy NgayGioKham
-                String lieuDung = rs.getString("LieuDung");
+                Prescription p = new Prescription();
+                p.setMaDon(rs.getString("MaDon"));
+                p.setMaHoSo(rs.getString("MaHoSo"));
+                p.setNgayKeDon(rs.getTimestamp("ngaykedon")); // Sửa tên cột
+                p.setMaBacSi(rs.getString("mabacsi")); // Sửa tên cột
                 
-                Prescription dtv = new Prescription(maDon, maBenhNhan, maBacSi, ngayKeDon, lieuDung);
-                list.add(dtv);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-    /**
-     * Lấy thông tin chi tiết của CHỈ MỘT đơn thuốc
-     * @param maDonCanTim Mã đơn thuốc bạn muốn tìm
-     */
-    public Prescription getDonThuocViewByMaDon(String maDonCanTim) {
-        Prescription dtv = null;
-        
-        String sql = "SELECT dt.MaDon, ls.MaBenhNhan, ls.MaBacSi, ls.NgayGioKham, dt.LieuDung " +
-                     "FROM DonThuoc dt " +
-                     "JOIN LichSuKham ls ON dt.MaDon = ls.MaDon " +
-                     "WHERE dt.MaDon = ?";
-
-        try (Connection conn = new connectMysql().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
-            stmt.setString(1, maDonCanTim);
-            
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    String maDon = rs.getString("MaDon");
-                    String maBenhNhan = rs.getString("MaBenhNhan");
-                    String maBacSi = rs.getString("MaBacSi");
-                    Date ngayKeDon = rs.getTimestamp("NgayGioKham"); // Lấy NgayGioKham
-                    String lieuDung = rs.getString("LieuDung");
-                    dtv = new Prescription(maDon, maBenhNhan, maBacSi, ngayKeDon, lieuDung);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return dtv;
-    }
-    
-    // thêm một đơn thuốc mới
-    public void updatePrescription(Prescription p) {
-    String sqlDonThuoc = "UPDATE DonThuoc SET MaBacSi = ?, LieuDung = ?, NgayKeDon = ? WHERE MaDon = ?";
-    String sqlLichSuKham = "UPDATE LichSuKham SET MaBenhNhan = ?, MaBacSi = ?, NgayGioKham = ? WHERE MaDon = ?";
-    
-    Connection conn = null;
-    try {
-        conn = new connectMysql().getConnection();
-        conn.setAutoCommit(false); // Bắt đầu Transaction
-
-        // 1. Cập nhật bảng DonThuoc
-        try (PreparedStatement stmt = conn.prepareStatement(sqlDonThuoc)) {
-            stmt.setString(1, p.getMaBacSi());
-            stmt.setString(2, p.getLieuDung());
-            stmt.setTimestamp(3, new java.sql.Timestamp(p.getNgayKeDon().getTime()));
-            stmt.setString(4, p.getMaDon());
-            stmt.executeUpdate();
-        }
-
-        // 2. Cập nhật bảng LichSuKham
-        try (PreparedStatement stmt = conn.prepareStatement(sqlLichSuKham)) {
-            stmt.setString(1, p.getMaBenhNhan());
-            stmt.setString(2, p.getMaBacSi());
-            stmt.setTimestamp(3, new java.sql.Timestamp(p.getNgayKeDon().getTime()));
-            stmt.setString(4, p.getMaDon());
-            stmt.executeUpdate();
-        }
-        
-        conn.commit(); // Hoàn tất Transaction
-        System.out.println("Cập nhật đơn thuốc thành công!");
-
-    } catch (Exception e) {
-        try {
-            if (conn != null) conn.rollback(); // Hủy bỏ nếu có lỗi
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }
-        e.printStackTrace();
-    } finally {
-        try {
-            if (conn != null) {
-                conn.setAutoCommit(true);
-                conn.close();
+                prescriptionList.add(p);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pst != null) pst.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
+        return prescriptionList;
     }
-}
 
-/**
- * Xóa một đơn thuốc.
- * Sẽ xóa ở cả 2 bảng (bắt đầu từ bảng con 'DonThuoc' trước).
- * Dùng Transaction để đảm bảo an toàn.
- * (Lưu ý: Bảng LoaiThuoc cũng tham chiếu MaDon, bạn cần xóa ở đó trước,
- * hoặc cài đặt Foreign Key ON DELETE CASCADE)
- */
-public void deletePrescription(String maDon) {
-    // Giả sử LoaiThuoc và DonThuoc là bảng con của LichSuKham
-    // Bạn phải xóa từ các bảng con trước
-    String sqlLoaiThuoc = "DELETE FROM LoaiThuoc WHERE MaDon = ?";
-    String sqlDonThuoc = "DELETE FROM DonThuoc WHERE MaDon = ?";
-    String sqlLichSuKham = "DELETE FROM LichSuKham WHERE MaDon = ?";
-
-    Connection conn = null;
-    try {
-        conn = new connectMysql().getConnection();
-        conn.setAutoCommit(false); // Bắt đầu Transaction
-
-        // 1. (QUAN TRỌNG) Xóa ở bảng LoaiThuoc
-        try (PreparedStatement stmt = conn.prepareStatement(sqlLoaiThuoc)) {
-            stmt.setString(1, maDon);
-            stmt.executeUpdate();
-        }
+    // Xóa một đơn thuốc
+    public int delete(String maDon) {
+        int kq = 0;
+        Connection con = JDBCUtil.getConnection();
         
-        // 2. Xóa ở bảng DonThuoc
-        try (PreparedStatement stmt = conn.prepareStatement(sqlDonThuoc)) {
-            stmt.setString(1, maDon);
-            stmt.executeUpdate();
-        }
+        // SỬA LẠI: Tên bảng chữ thường
+        String sql = "DELETE FROM donthuoc WHERE MaDon = ?";
 
-        // 3. Xóa ở bảng LichSuKham
-        try (PreparedStatement stmt = conn.prepareStatement(sqlLichSuKham)) {
-            stmt.setString(1, maDon);
-            stmt.executeUpdate();
-        }
-
-        conn.commit(); // Hoàn tất Transaction
-        System.out.println("Xóa đơn thuốc thành công!");
-
-    } catch (Exception e) {
+        PreparedStatement pst = null;
         try {
-            if (conn != null) conn.rollback(); // Hủy bỏ nếu có lỗi
-        } catch (SQLException se) {
-            se.printStackTrace();
+            pst = con.prepareStatement(sql);
+            pst.setString(1, maDon);
+            kq = pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PrescriptionController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (pst != null) pst.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                Logger.getLogger(PrescriptionController.class.getName()).log(Level.SEVERE, null, e);
+            }
         }
-        e.printStackTrace();
-    } finally {
+        return kq;
+    }
+    
+    // Lấy Mã Hồ Sơ
+    public List<String> getAllMedicalRecordIDs() {
+        List<String> recordIDs = new ArrayList<>();
+        Connection con = JDBCUtil.getConnection();
+        
+        // SỬA LẠI: Tên bảng chữ thường
+        String sql = "SELECT DISTINCT MaHoSo FROM hosobenhan ORDER BY MaHoSo"; 
+        
+        PreparedStatement pst = null;
+        ResultSet rs = null;
         try {
-            if (conn != null) {
-                conn.setAutoCommit(true);
-                conn.close();
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                recordIDs.add(rs.getString("MaHoSo"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            // ... (code finally giữ nguyên) ...
         }
+        return recordIDs;
     }
-}
+    
+    // Lấy Mã Bác Sĩ
+    public List<String> getAllDoctorIDs() {
+        List<String> doctorIDs = new ArrayList<>();
+        Connection con = JDBCUtil.getConnection();
+        
+        // SỬA LẠI: Tên bảng và cột chữ thường
+        String sql = "SELECT mabacsi FROM bacsi ORDER BY mabacsi"; 
+        
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                doctorIDs.add(rs.getString("mabacsi")); // Sửa tên cột
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            // ... (code finally giữ nguyên) ...
+        }
+        return doctorIDs;
+    }
+    
+    // Lấy MaBacSi từ MaHoSo
+    public String getMaBacSiFromHoSo(String maHoSo) {
+        String maBacSi = null;
+        Connection con = JDBCUtil.getConnection();
+        
+        // SỬA LẠI: Tên bảng và cột chữ thường
+        String sql = "SELECT mabacsi FROM hosobenhan WHERE MaHoSo = ?"; 
+        
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, maHoSo);
+            rs = pst.executeQuery();
+            
+            if (rs.next()) {
+                maBacSi = rs.getString("mabacsi"); // Sửa tên cột
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            // ... (code finally giữ nguyên) ...
+        }
+        return maBacSi;
+    }
+    
+//Lấy tất cả thuốc từ CSDL (cho comboMaThuoc)
+    public List<Thuoc> getAllThuoc() {
+        List<Thuoc> dsThuoc = new ArrayList<>();
+        Connection con = JDBCUtil.getConnection(); // Dùng file kết nối của bạn
+        
+        // SỬA LẠI: Thêm "nhasanxuat" vào câu SELECT
+        String sql = "SELECT maThuoc, tenThuoc, donViTinh, moTa, gia, nhasanxuat FROM thuoc"; 
+
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Thuoc t = new Thuoc();
+                t.setMaThuoc(rs.getString("maThuoc"));
+                t.setTenThuoc(rs.getString("tenThuoc"));
+                t.setDonViTinh(rs.getString("donViTinh"));
+                t.setMoTa(rs.getString("moTa")); // Lấy luôn mô tả
+                t.setGia(rs.getDouble("gia"));
+                t.setNhasanxuat(rs.getString("nhasanxuat")); // <-- ĐÃ THÊM
+                
+                dsThuoc.add(t);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            // ... (code đóng kết nối pst, rs, con) ...
+        }
+        return dsThuoc;
+    }
+
+//Lấy tất cả MaDon đã có (cho comboMaDon)
+    public List<String> getAllPrescriptionIDs() {
+        List<String> idList = new ArrayList<>();
+        Connection con = JDBCUtil.getConnection();
+        String sql = "SELECT MaDon FROM donthuoc ORDER BY MaDon"; 
+        
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                idList.add(rs.getString("MaDon"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            // ... (code đóng kết nối pst, rs, con) ...
+        }
+        return idList;
+    }
+
+//Lấy chi tiết của MỘT đơn thuốc (cho JTable)
+    public List<ChiTietDonThuoc> getChiTietDonThuoc(String maDon) {
+        List<ChiTietDonThuoc> dsChiTiet = new ArrayList<>();
+        Connection con = JDBCUtil.getConnection();
+        
+        String sql = "SELECT ct.maDon, ct.soLuong, ct.lieuDung, ct.gia, " +
+                     "t.maThuoc, t.tenThuoc, t.donViTinh " +
+                     "FROM chitietdonthuoc ct " +
+                     "JOIN thuoc t ON ct.maThuoc = t.maThuoc " +
+                     "WHERE ct.maDon = ?";
+        
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, maDon);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Thuoc t = new Thuoc();
+                t.setMaThuoc(rs.getString("maThuoc"));
+                t.setTenThuoc(rs.getString("tenThuoc"));
+                t.setDonViTinh(rs.getString("donViTinh"));
+                
+                ChiTietDonThuoc ct = new ChiTietDonThuoc();
+                ct.setMaDon(rs.getString("maDon"));
+                ct.setThuoc(t);
+                ct.setSoLuong(rs.getInt("soLuong"));
+                ct.setLieuDung(rs.getString("lieuDung"));
+                ct.setGia(rs.getDouble("gia"));
+                
+                dsChiTiet.add(ct);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            // ... (code đóng kết nối pst, rs, con) ...
+        }
+        return dsChiTiet;
+    }
+
+//    Thêm một chi tiết đơn thuốc (cho nút "Thêm" ở Tab 2)
+    public int insertChiTiet(ChiTietDonThuoc chiTiet) {
+        int kq = 0;
+        Connection con = JDBCUtil.getConnection();
+        String sql = "INSERT INTO chitietdonthuoc (maDon, maThuoc, soLuong, lieuDung, gia) VALUES (?, ?, ?, ?, ?)";
+        
+        PreparedStatement pst = null;
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, chiTiet.getMaDon());
+            pst.setString(2, chiTiet.getThuoc().getMaThuoc());
+            pst.setInt(3, chiTiet.getSoLuong());
+            pst.setString(4, chiTiet.getLieuDung());
+            pst.setDouble(5, chiTiet.getGia());
+            
+            kq = pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PrescriptionController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            // ... (code đóng kết nối pst, con) ...
+        }
+        return kq;
+    }
+
+//Xóa một chi tiết đơn thuốc (cho nút "Xóa" ở Tab 2)
+    public int deleteChiTiet(String maDon, String maThuoc) {
+        int kq = 0;
+        Connection con = JDBCUtil.getConnection();
+        String sql = "DELETE FROM chitietdonthuoc WHERE maDon = ? AND maThuoc = ?";
+        
+        PreparedStatement pst = null;
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, maDon);
+            pst.setString(2, maThuoc);
+            kq = pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PrescriptionController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            // ... (code đóng kết nối pst, con) ...
+        }
+        return kq;
+    }
     
 }
