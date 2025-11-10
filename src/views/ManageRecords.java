@@ -4,8 +4,12 @@
  */
 package views;
 
+import Controllers.DoctorController;
+import controllers.ControllerService;
 import controllers.MedicalRecordController;
 import controllers.PatientController;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import models.MedicalRecord;
 
 /**
@@ -46,7 +50,7 @@ public class ManageRecords extends javax.swing.JPanel {
         ngayXuat = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        tenBs = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -60,7 +64,7 @@ public class ManageRecords extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        list = new javax.swing.JList<>();
         jTextField1 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 153, 153));
@@ -143,10 +147,10 @@ public class ManageRecords extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel10.setText("Thông Tin Bệnh Nhân:");
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        tenBs.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tenBs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                tenBsActionPerformed(evt);
             }
         });
 
@@ -179,12 +183,12 @@ public class ManageRecords extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(ngayNhap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tenBs, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ngayXuat))
                 .addGap(83, 83, 83))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField2, maBN, ngayNhap, ngayXuat, tenBN});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {maBN, ngayNhap, ngayXuat, tenBN, tenBs});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,10 +197,10 @@ public class ManageRecords extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tenBs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11))
                         .addGap(8, 8, 8)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -204,7 +208,7 @@ public class ManageRecords extends javax.swing.JPanel {
                                 .addGap(3, 3, 3)
                                 .addComponent(ngayNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(4, 4, 4)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -226,7 +230,7 @@ public class ManageRecords extends javax.swing.JPanel {
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel11, jLabel6, jLabel9});
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextField2, maBN, ngayNhap, ngayXuat, tenBN});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {maBN, ngayNhap, ngayXuat, tenBN, tenBs});
 
         dieuTri.setColumns(20);
         dieuTri.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -288,13 +292,13 @@ public class ManageRecords extends javax.swing.JPanel {
                 .addGap(17, 17, 17))
         );
 
-        jList1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+        list.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        list.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { " " };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane4.setViewportView(jList1);
+        jScrollPane4.setViewportView(list);
 
         jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jTextField1.setText("Dịch Vụ Y Tế");
@@ -344,14 +348,13 @@ public class ManageRecords extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(93, 93, 93)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(15, 15, 15)))
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -359,7 +362,7 @@ public class ManageRecords extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -375,22 +378,32 @@ public class ManageRecords extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tracuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tracuuActionPerformed
-        // TODO add your handling code here:
+         //TODO add your handling code here:
         String maHS = this.mahs.getText();
+        System.out.println(this.mahs);
         MedicalRecordController mrc = new MedicalRecordController();
         MedicalRecord mr = mrc.selectByMahs(maHS);
         PatientController pc = new PatientController();
         this.maBN.setText(mr.getPatientId());
         this.tenBN.setText(pc.searchPatient(mr.getPatientId()));
-        this.ngayNhap.setText(mr.getCreatedDate());
+        this.ngayNhap.setText(String.valueOf(mr.getCreatedDate()));
         if(mr.getNgayxuat()==null){
             this.ngayXuat.setText("Chưa xuất viện");
         }
-        else this.ngayXuat.setText(mr.getNgayxuat());
+        else this.ngayXuat.setText(String.valueOf(mr.getNgayxuat()));
         this.chuanDoan.setText(mr.getDiagnosis());
         this.dieuTri.setText(mr.getPhuongandieutri());
         this.ketQua.setText(mr.getStatus());
+        DoctorController dc = new DoctorController();
+        this.tenBs.setText(dc.getNameDoctor(mr.getMabs()));
         System.out.println("hien thi thanh cong");
+        
+        ControllerService cs = new ControllerService();
+        ArrayList<String> arr = cs.getUsedService(maHS);
+        DefaultListModel<String> model = new DefaultListModel();
+        for(String s : arr)
+            model.addElement(s);
+        this.list.setModel(model);
     }//GEN-LAST:event_tracuuActionPerformed
 
     private void maBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maBNActionPerformed
@@ -401,9 +414,9 @@ public class ManageRecords extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void tenBsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenBsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_tenBsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -420,7 +433,6 @@ public class ManageRecords extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -431,13 +443,14 @@ public class ManageRecords extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextArea ketQua;
+    private javax.swing.JList<String> list;
     private javax.swing.JTextField maBN;
     private javax.swing.JTextField mahs;
     private javax.swing.JTextField ngayNhap;
     private javax.swing.JTextField ngayXuat;
     private javax.swing.JTextField tenBN;
+    private javax.swing.JTextField tenBs;
     private javax.swing.JButton tracuu;
     // End of variables declaration//GEN-END:variables
 }

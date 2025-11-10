@@ -1,39 +1,56 @@
 package models;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class MedicalRecord {
     private String recordId;
-    private String patientId;
+    private String patientId, mabs;
     private String diagnosis;
-    private String createdDate, ngayxuat;
+    private LocalDate createdDate, ngayxuat;
     private String status, phuongandieutri;
 
     public MedicalRecord() {}
 
-    public MedicalRecord(String recordId, String patientId, String diagnosis, String createdDate, String phuongandieutri) {
+
+
+    public MedicalRecord(String recordId, String patientId, String mabs, String diagnosis, LocalDate createdDate, String phuongandieutri) {
         this.recordId = recordId;
         this.patientId = patientId;
+        this.mabs = mabs;
         this.diagnosis = diagnosis;
         this.createdDate = createdDate;
         this.phuongandieutri = phuongandieutri;
     }
-    
 
-    public MedicalRecord(String recordId, String patientId, String diagnosis, String createdDate, String ngayxuat, String status, String pa) {
+    public MedicalRecord(String recordId, String patientId, String mabs, String diagnosis, LocalDate createdDate, LocalDate ngayxuat, String status, String phuongandieutri) {
         this.recordId = recordId;
         this.patientId = patientId;
+        this.mabs = mabs;
         this.diagnosis = diagnosis;
         this.createdDate = createdDate;
-        this.status = status;
         this.ngayxuat = ngayxuat;
-        this.phuongandieutri = pa;
+        this.status = status;
+        this.phuongandieutri = phuongandieutri;
     }
+    
 
-    public String getNgayxuat() {
+
+    
+    public LocalDate getNgayxuat() {
         return ngayxuat;
     }
 
-    public void setNgayxuat(String ngayxuat) {
+    public void setNgayxuat(LocalDate ngayxuat) {
         this.ngayxuat = ngayxuat;
+    }
+
+    public String getMabs() {
+        return mabs;
+    }
+
+    public void setMabs(String mabs) {
+        this.mabs = mabs;
     }
 
     public String getPhuongandieutri() {
@@ -44,7 +61,7 @@ public class MedicalRecord {
         this.phuongandieutri = phuongandieutri;
     }
 
-    public MedicalRecord(String recordId, String patientId, String diagnosis, String createdDate) {
+    public MedicalRecord(String recordId, String patientId, String diagnosis, LocalDate createdDate) {
         this.recordId = recordId;
         this.patientId = patientId;
         this.diagnosis = diagnosis;
@@ -63,8 +80,8 @@ public class MedicalRecord {
     public String getDiagnosis() { return diagnosis; }
     public void setDiagnosis(String diagnosis) { this.diagnosis = diagnosis; }
 
-    public String getCreatedDate() { return createdDate; }
-    public void setCreatedDate(String createdDate) { this.createdDate = createdDate; }
+    public LocalDate getCreatedDate() { return createdDate; }
+    public void setCreatedDate(LocalDate createdDate) { this.createdDate = createdDate; }
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }

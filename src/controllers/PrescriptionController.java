@@ -2,6 +2,9 @@ package controllers;
 
 import connection.JDBCUtil; 
 import models.Prescription;
+import models.Thuoc;
+import models.ChiTietDonThuoc;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -226,5 +229,144 @@ public class PrescriptionController {
             // ... (code finally giữ nguyên) ...
         }
         return maBacSi;
+    }
+    
+//Lấy tất cả thuốc từ CSDL (cho comboMaThuoc)
+    public List<Thuoc> getAllThuoc() {
+        List<Thuoc> dsThuoc = new ArrayList<>();
+        Connection con = JDBCUtil.getConnection(); // Dùng file kết nối của bạn
+        
+        // SỬA LẠI: Thêm "nhasanxuat" vào câu SELECT
+        String sql = "SELECT maThuoc, tenThuoc, donViTinh, moTa, gia, nhasanxuat FROM thuoc"; 
+
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Thuoc t = new Thuoc();
+                t.setMaThuoc(rs.getString("maThuoc"));
+                t.setTenThuoc(rs.getString("tenThuoc"));
+                t.setDonViTinh(rs.getString("donViTinh"));
+                t.setMoTa(rs.getString("moTa")); // Lấy luôn mô tả
+                t.setGia(rs.getDouble("gia"));
+                t.setNhasanxuat(rs.getString("nhasanxuat")); // <-- ĐÃ THÊM
+                
+                dsThuoc.add(t);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            // ... (code đóng kết nối pst, rs, con) ...
+        }
+        return dsThuoc;
+    }
+
+//Lấy tất cả MaDon đã có (cho comboMaDon)
+    public List<String> getAllPrescriptionIDs() {
+        List<String> idList = new ArrayList<>();
+        Connection con = JDBCUtil.getConnection();
+        String sql = "SELECT MaDon FROM donthuoc ORDER BY MaDon"; 
+        
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                idList.add(rs.getString("MaDon"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            // ... (code đóng kết nối pst, rs, con) ...
+        }
+        return idList;
+    }
+
+//Lấy chi tiết của MỘT đơn thuốc (cho JTable)
+    public List<ChiTietDonThuoc> getChiTietDonThuoc(String maDon) {
+        List<ChiTietDonThuoc> dsChiTiet = new ArrayList<>();
+        Connection con = JDBCUtil.getConnection();
+        
+        String sql = "SELECT ct.maDon, ct.soLuong, ct.lieuDung, ct.gia, " +
+                     "t.maThuoc, t.tenThuoc, t.donViTinh " +
+                     "FROM chitietdonthuoc ct " +
+                     "JOIN thuoc t ON ct.maThuoc = t.maThuoc " +
+                     "WHERE ct.maDon = ?";
+        
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, maDon);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Thuoc t = new Thuoc();
+                t.setMaThuoc(rs.getString("maThuoc"));
+                t.setTenThuoc(rs.getString("tenThuoc"));
+                t.setDonViTinh(rs.getString("donViTinh"));
+                
+                ChiTietDonThuoc ct = new ChiTietDonThuoc();
+                ct.setMaDon(rs.getString("maDon"));
+                ct.setThuoc(t);
+                ct.setSoLuong(rs.getInt("soLuong"));
+                ct.setLieuDung(rs.getString("lieuDung"));
+                ct.setGia(rs.getDouble("gia"));
+                
+                dsChiTiet.add(ct);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            // ... (code đóng kết nối pst, rs, con) ...
+        }
+        return dsChiTiet;
+    }
+
+//    Thêm một chi tiết đơn thuốc (cho nút "Thêm" ở Tab 2)
+    public int insertChiTiet(ChiTietDonThuoc chiTiet) {
+        int kq = 0;
+        Connection con = JDBCUtil.getConnection();
+        String sql = "INSERT INTO chitietdonthuoc (maDon, maThuoc, soLuong, lieuDung, gia) VALUES (?, ?, ?, ?, ?)";
+        
+        PreparedStatement pst = null;
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, chiTiet.getMaDon());
+            pst.setString(2, chiTiet.getThuoc().getMaThuoc());
+            pst.setInt(3, chiTiet.getSoLuong());
+            pst.setString(4, chiTiet.getLieuDung());
+            pst.setDouble(5, chiTiet.getGia());
+            
+            kq = pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PrescriptionController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            // ... (code đóng kết nối pst, con) ...
+        }
+        return kq;
+    }
+
+//Xóa một chi tiết đơn thuốc (cho nút "Xóa" ở Tab 2)
+    public int deleteChiTiet(String maDon, String maThuoc) {
+        int kq = 0;
+        Connection con = JDBCUtil.getConnection();
+        String sql = "DELETE FROM chitietdonthuoc WHERE maDon = ? AND maThuoc = ?";
+        
+        PreparedStatement pst = null;
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, maDon);
+            pst.setString(2, maThuoc);
+            kq = pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PrescriptionController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            // ... (code đóng kết nối pst, con) ...
+        }
+        return kq;
     }
 }

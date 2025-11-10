@@ -4,6 +4,8 @@
  */
 package views;
 
+import controllers.ChiDinhCon;
+import controllers.ControllerService;
 import controllers.KhamController;
 import controllers.LichSuKhamController;
 import controllers.MedicalRecordController;
@@ -11,6 +13,11 @@ import controllers.PatientController;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import models.ChiDinhDichVu;
 import models.LicSuKham;
 import models.MedicalRecord;
 
@@ -25,10 +32,13 @@ public class ManageDiagnose extends javax.swing.JPanel {
      */
     public ManageDiagnose() {
         this.maBn = this.maBS = this.maHS="";
+        
+        this.maHS = mrc.nextRecordID();
         initComponents();
         
     }
-
+MedicalRecordController mrc = new MedicalRecordController();
+HashMap<String, String> map;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +54,8 @@ public class ManageDiagnose extends javax.swing.JPanel {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -53,7 +65,7 @@ public class ManageDiagnose extends javax.swing.JPanel {
         chuanDoan = new javax.swing.JTextArea();
         diagnose = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listdichvu = new javax.swing.JList<>();
         jButton2 = new javax.swing.JButton();
         maBN = new javax.swing.JTextField();
         maBacSi = new javax.swing.JTextField();
@@ -62,6 +74,7 @@ public class ManageDiagnose extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         phuongAn = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -77,6 +90,13 @@ public class ManageDiagnose extends javax.swing.JPanel {
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(jList1);
 
         setBackground(new java.awt.Color(102, 255, 255));
 
@@ -109,13 +129,8 @@ public class ManageDiagnose extends javax.swing.JPanel {
             }
         });
 
-        jList1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Khám tổng quát", "Chụp X-quang", "Chụp các lớp", "Xét nhiệm máu" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList1);
+        listdichvu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jScrollPane2.setViewportView(listdichvu);
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton2.setText("Dịch Vụ Y Tế");
@@ -147,6 +162,14 @@ public class ManageDiagnose extends javax.swing.JPanel {
         phuongAn.setRows(5);
         jScrollPane3.setViewportView(phuongAn);
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButton1.setText("Xác Nhận");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -160,29 +183,30 @@ public class ManageDiagnose extends javax.swing.JPanel {
                             .addComponent(jLabel4)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tenBN, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(maBacSi, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tenBN, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(maBN, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(search))))
+                                .addComponent(search))
+                            .addComponent(maBacSi)))
                     .addComponent(jLabel5)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(98, 98, 98)
+                .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(47, 47, 47)
+                        .addComponent(jButton1))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
                     .addComponent(jLabel6)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(diagnose)
-                .addGap(544, 544, 544))
+                .addGap(540, 540, 540))
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {maBacSi, tenBN});
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4});
 
@@ -190,7 +214,9 @@ public class ManageDiagnose extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(jButton2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -216,7 +242,7 @@ public class ManageDiagnose extends javax.swing.JPanel {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 29, 29)
+                .addGap(34, 34, 34)
                 .addComponent(diagnose, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -232,7 +258,7 @@ public class ManageDiagnose extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,40 +271,37 @@ public class ManageDiagnose extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        ControllerService cs = new ControllerService();
+        map = cs.getService();
+        System.out.println("lay thanh cong");
+        DefaultListModel<String> model = new DefaultListModel<>();
+        for(String key:map.keySet()){
+            model.addElement(key);
+            System.out.println(key);
+        }
+        this.listdichvu.setModel(model);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void diagnoseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diagnoseActionPerformed
         // TODO add your handling code here:
-        this.maBS = this.maBacSi.getText();
+        String mabacsi = this.maBacSi.getText();
         
-        MedicalRecordController mrc = new MedicalRecordController();
-        this.maHS = mrc.nextRecordID();
+        
+        System.out.println(this.maBS);
+        
         String Diagnose = this.chuanDoan.getText();
         LocalDate today = LocalDate.now();
         String patientID = this.maBN.getText();
         String PhuongAn = this.phuongAn.getText();
-        MedicalRecord mr = new MedicalRecord(this.maHS, patientID, Diagnose, String.valueOf(today), PhuongAn);
+        String mahoso = mrc.nextRecordID();
+        System.out.println(mahoso);
+        
+        MedicalRecord mr = new MedicalRecord(mahoso, patientID, mabacsi, Diagnose, today, PhuongAn);
         mrc.insert(mr);//them ho so
         System.out.println("them ho so benh an thanh cong\n");
-        //insert bang kham
-        KhamController kc = new KhamController();
-        kc.insert(this.maBn, this.maBS);
-        System.out.println("them bang kham thanh cong\n");
-        //insert bang lic su kham
-        LocalDateTime now = LocalDateTime.now();//lay nay gio kham
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        
-        String ngayGioKham = now.format(formatter);
-        System.out.println("Định dạng: " + ngayGioKham);
-        
-        LichSuKhamController lsc = new LichSuKhamController();
-        //String maDT = lsc.nextRecordID();//lay ma dt tieep theo
-        
-        lsc.insert(new LicSuKham(this.maHS, this.maBn, now, this.maBS));//insert lic su kham;
-        
         
         System.out.println("then thanh cong tren layout");
-        this.maBn = this.maBS = this.maHS="";
+        this.maHS=mahoso;
     }//GEN-LAST:event_diagnoseActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
@@ -288,8 +311,23 @@ public class ManageDiagnose extends javax.swing.JPanel {
         PatientController pc = new PatientController();
         System.out.println(pc.searchPatient(this.maBn));
         this.tenBN.setText(pc.searchPatient(this.maBn));
-        
+
     }//GEN-LAST:event_searchActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        System.out.println(this.maHS);
+        ChiDinhCon cdc = new ChiDinhCon();
+        List<String> select = this.listdichvu.getSelectedValuesList();
+        for(String s : select){
+            System.out.println(s+" "+map.get(s));
+            cdc.insertChiDinh(new ChiDinhDichVu(this.maHS, map.get(s)));
+            
+        }
+        this.maBN.setText("");
+        this.chuanDoan.setText("");
+        this.phuongAn.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
     public static void main(String[] args) {
         
     }
@@ -299,6 +337,7 @@ public class ManageDiagnose extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea chuanDoan;
     private javax.swing.JButton diagnose;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
@@ -316,6 +355,8 @@ public class ManageDiagnose extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JList<String> listdichvu;
     private javax.swing.JTextField maBN;
     private javax.swing.JTextField maBacSi;
     private javax.swing.JTextArea phuongAn;

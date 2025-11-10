@@ -1,24 +1,41 @@
 package models;
 
 public class Service {
-    private String serviceId;
-    private String serviceName;
-    private double price;
+    private String maDichVu;
+    private String tenDichVu;
+    private double chiPhi; // Sử dụng double cho Chi Phí
 
+    // Constructors
     public Service() {}
 
-    public Service(String serviceId, String serviceName, double price) {
-        this.serviceId = serviceId;
-        this.serviceName = serviceName;
-        this.price = price;
+    public Service(String maDichVu, String tenDichVu, double chiPhi) {
+        this.maDichVu = maDichVu;
+        this.tenDichVu = tenDichVu;
+        this.chiPhi = chiPhi;
     }
 
-    public String getServiceId() { return serviceId; }
-    public void setServiceId(String serviceId) { this.serviceId = serviceId; }
+    // Getters and Setters
+    public String getMaDichVu() {
+        return maDichVu;
+    }
 
-    public String getServiceName() { return serviceName; }
-    public void setServiceName(String serviceName) { this.serviceName = serviceName; }
+    public void setMaDichVu(String maDichVu) {
+        this.maDichVu = maDichVu;
+    }
 
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
+    public String getTenDichVu() {
+        return tenDichVu;
+    }
+
+    public void setTenDichVu(String tenDichVu) {
+        this.tenDichVu = tenDichVu;
+    }
+
+    public double getChiPhi() {
+        return chiPhi;
+    }
+
+    public void setChiPhi(double chiPhi) {
+        this.chiPhi = chiPhi;
+    }
 }

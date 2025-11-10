@@ -4,11 +4,15 @@
  */
 package Controllers;
 
+import connection.JDBCUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import connection.connectMysql;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Doctor;
 
 /**
@@ -155,5 +159,20 @@ public boolean isCardIdExists(String cardId) {
         e.printStackTrace();
     }
     return exists;
+}
+public String getNameDoctor(String maBS){
+    String ten = null;
+    Connection con = JDBCUtil.getConnection();
+    String sql = "select n.hoten from nguoi n where n.cccd in (select b.cccd from bacsi b where b.mabacsi = ?)";
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, maBS);
+            ResultSet rs = pst.executeQuery();
+            rs.next();
+            ten = rs.getString("hoten");
+        } catch (SQLException ex) {
+            Logger.getLogger(DoctorController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ten;
 }
 }

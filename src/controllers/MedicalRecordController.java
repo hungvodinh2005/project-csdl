@@ -7,6 +7,7 @@ package controllers;
 import connection.JDBCUtil;
 import models.MedicalRecord;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,8 +16,9 @@ import java.util.logging.Logger;
  * @author CPS
  */
 public class MedicalRecordController {
-    public String nextRecordID(){
-        String recordID="";
+
+    public String nextRecordID() {
+        String recordID = "";
         Connection con = JDBCUtil.getConnection();
         String sql = "select * from hosobenhan order by mahoso desc limit 1";
         PreparedStatement pst = null;
@@ -26,7 +28,7 @@ public class MedicalRecordController {
             rs.next();
             recordID = rs.getString("mahoso");
             int ma = Integer.parseInt(recordID.substring(2));
-            recordID = String.format("HS%03d", ma+1);
+            recordID = String.format("HS%03d", ma + 1);
             con.close();
             rs.close();
             pst.close();
@@ -34,31 +36,33 @@ public class MedicalRecordController {
             throw new RuntimeException(e);
         }
         return recordID;
-        
+
     }
-    public int insert(MedicalRecord mr){
-        int kq=0;
+
+    public int insert(MedicalRecord mr) {
+        int kq = 0;
         Connection con = JDBCUtil.getConnection();
-        String sql="INSERT INTO HoSoBenhAn (MaHoSo, MaBenhNhan, NgayNhapVien, ChanDoan, phuongandieutri) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO HoSoBenhAn (MaHoSo, MaBenhNhan, NgayNhapVien, ChuanDoan, phuongandieutri, mabacsi) VALUES(?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, mr.getRecordId());
             pst.setString(2, mr.getPatientId());
             pst.setString(4, mr.getDiagnosis());
-            pst.setString(3, mr.getCreatedDate());
+            pst.setDate(3, Date.valueOf(mr.getCreatedDate()));
             pst.setString(5, mr.getPhuongandieutri());
-            kq=pst.executeUpdate();
+            pst.setString(6, mr.getMabs());
+            kq = pst.executeUpdate();
             System.out.println("insert thanh cong");
             con.close();
             pst.close();
         } catch (SQLException ex) {
             Logger.getLogger(MedicalRecordController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         return kq;
     }
-    public MedicalRecord selectByMahs(String maHS){
+
+    public MedicalRecord selectByMahs(String maHS) {
         Connection con = JDBCUtil.getConnection();
         MedicalRecord mr = null;
         String sql = "select * from hosobenhan where mahoso = ? limit 1";
@@ -68,12 +72,22 @@ public class MedicalRecordController {
             ResultSet rs = pst.executeQuery();
             rs.next();
             String maBN = rs.getString("mabenhnhan");
-            String ngayvao = rs.getString("ngaynhapvien");
-            String ngayra = rs.getString("ngayxuatvien");
-            String chuandoan = rs.getString("chandoan");
+            Date sqlDate = rs.getDate("ngaynhapvien");
+            LocalDate ngayvao = null;
+            if (sqlDate != null) {
+                ngayvao = sqlDate.toLocalDate();
+            }
+            Date sqlDate1 = rs.getDate("ngayxuatvien");
+            LocalDate ngayra = null;
+            if (sqlDate1 != null) {
+                ngayra = sqlDate1.toLocalDate();
+            }
+            String chuandoan = rs.getString("chuandoan");
             String dieutri = rs.getString("phuongandieutri");
             String ketqua = rs.getString("ketqua");
-            mr=new MedicalRecord(maHS, maBN, chuandoan, ngayvao, ngayra, ketqua, dieutri);
+            String mabs = rs.getString("mabacsi");
+            mr = new MedicalRecord(maHS, maBN, mabs, chuandoan, ngayvao, ngayra, ketqua, dieutri);
+            System.out.println("lay database thanh cong");
             con.close();
             rs.close();
             pst.close();
@@ -82,6 +96,7 @@ public class MedicalRecordController {
         }
         return mr;
     }
+
     public static void main(String[] args) {
         MedicalRecordController mrc = new MedicalRecordController();
         System.out.println(mrc.nextRecordID());
