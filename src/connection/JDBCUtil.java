@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class JDBCUtil {
     public static Connection getConnection(){
         Connection con = null;
-        String url = "jdbc:mysql://localhost:3306/btlcsdl";
+        String url = "jdbc:mysql://localhost:3306/csdl";
         String user = "root";
         String pass = "Quang@0211";
         try {

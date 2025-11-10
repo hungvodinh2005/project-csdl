@@ -19,6 +19,11 @@
             <file>file:/D:/git/BTLJAVA/src/controllers/MedicalRecordController.java</file>
             <file>file:/D:/git/BTLJAVA/src/models/Diagnose.java</file>
             <file>file:/D:/git/BTLJAVA/src/models/MedicalRecord.java</file>
+            <file>file:/D:/git/BTLJAVA/src/controllers/DoctorController.java</file>
+            <file>file:/D:/git/BTLJAVA/src/controllers/PatientController.java</file>
+            <file>file:/D:/git/BTLJAVA/src/controllers/ControllerService.java</file>
+            <file>file:/D:/git/BTLJAVA/src/models/ChiDinhDichVu.java</file>
+            <file>file:/D:/git/BTLJAVA/src/controllers/ChiDinhCon.java</file>
         </group>
     </open-files>
 </project-private>
