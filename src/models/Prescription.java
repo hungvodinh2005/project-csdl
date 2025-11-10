@@ -1,37 +1,23 @@
 package models;
 
-import java.util.Date; // Dùng java.util.Date để lưu ngày
+import java.util.Date;
 
-/**
- * Đây là lớp Model "ảo" (View Model), dùng để chứa dữ liệu 
- * được kết hợp từ nhiều bảng, cụ thể là LichSuKham và DonThuoc.
- */
 public class Prescription {
 
-    private String maDon;
-    private String maBenhNhan;
-    private String maBacSi;
-    private Date ngayKeDon; // Sẽ lấy từ NgayGioKham của bảng LichSuKham
-    private String lieuDung;
+    private String maDon;       // Mã đơn thuốc (tự tăng)
+    private String maHoSo;   // Khóa ngoại liên kết với HoSoBenhAn
+    private Date ngayKeDon;  // Ngày kê đơn
+    private String maBacSi;  // Khóa ngoại liên kết với BacSi
 
-    // --- Constructors ---
-    
-    // Constructor rỗng
     public Prescription() {
     }
 
-    // Constructor đầy đủ
-    public Prescription(String maDon, String maBenhNhan, String maBacSi, Date ngayKeDon, String lieuDung) {
-        this.maDon = maDon;
-        this.maBenhNhan = maBenhNhan;
-        this.maBacSi = maBacSi;
+    public Prescription(String maHoSo, Date ngayKeDon, String maBacSi) {
+        this.maHoSo = maHoSo;
         this.ngayKeDon = ngayKeDon;
-        this.lieuDung = lieuDung;
+        this.maBacSi = maBacSi;
     }
 
-    // --- Getters and Setters ---
-    // (Bắt buộc phải có để truy cập và thay đổi dữ liệu)
-    
     public String getMaDon() {
         return maDon;
     }
@@ -40,20 +26,12 @@ public class Prescription {
         this.maDon = maDon;
     }
 
-    public String getMaBenhNhan() {
-        return maBenhNhan;
+    public String getMaHoSo() {
+        return maHoSo;
     }
 
-    public void setMaBenhNhan(String maBenhNhan) {
-        this.maBenhNhan = maBenhNhan;
-    }
-
-    public String getMaBacSi() {
-        return maBacSi;
-    }
-
-    public void setMaBacSi(String maBacSi) {
-        this.maBacSi = maBacSi;
+    public void setMaHoSo(String maHoSo) {
+        this.maHoSo = maHoSo;
     }
 
     public Date getNgayKeDon() {
@@ -64,11 +42,21 @@ public class Prescription {
         this.ngayKeDon = ngayKeDon;
     }
 
-    public String getLieuDung() {
-        return lieuDung;
+    public String getMaBacSi() {
+        return maBacSi;
     }
 
-    public void setLieuDung(String lieuDung) {
-        this.lieuDung = lieuDung;
+    public void setMaBacSi(String maBacSi) {
+        this.maBacSi = maBacSi;
+    }
+
+    @Override
+    public String toString() {
+        return "Prescription{" +
+                "maDon=" + maDon +
+                ", maHoSo='" + maHoSo + '\'' +
+                ", ngayKeDon=" + ngayKeDon +
+                ", maBacSi='" + maBacSi + '\'' +
+                '}';
     }
 }

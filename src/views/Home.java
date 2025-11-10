@@ -60,9 +60,9 @@ public class Home {
         center.add(new ManageDiagnose(), "Diagnose");
         center.add(new ManageRecords(), "Records");
 //        center.add(new ManageUpdateStatus(), "Tracking");
-        center.add(new ManageMedicine(), "Medicine");
         center.add(new ManageService(), "Service");
         center.add(new Report(), "Report");
+        center.add(new ManagePrescription(), "Prescription");
 
         // Sự kiện chuyển trang
         btnPatients.addActionListener(e -> cardLayout.show(center, "Patients"));
@@ -71,9 +71,10 @@ public class Home {
         btnDiagnose.addActionListener(e -> cardLayout.show(center, "Diagnose"));
         btnRecords.addActionListener(e -> cardLayout.show(center, "Records"));
         btnTracking.addActionListener(e -> cardLayout.show(center, "Tracking"));
-        btnMedicine.addActionListener(e -> cardLayout.show(center, "Medicine"));
+        btnMedicine.addActionListener(e -> cardLayout.show(center, "Prescription"));
         btnService.addActionListener(e -> cardLayout.show(center, "Service"));
         btnReport.addActionListener(e -> cardLayout.show(center, "Report"));
+        
         
 
         frame.add(header, BorderLayout.NORTH);
