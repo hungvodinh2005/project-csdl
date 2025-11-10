@@ -8,13 +8,57 @@ package views;
  *
  * @author DINHHUNG
  */
-public class ManageService extends javax.swing.JPanel {
 
+import controllers.ServiceController; 
+import models.Service; 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+
+public class ManageService extends javax.swing.JPanel {
+    
+    private ServiceController serviceController; // Sửa controller
+    private DefaultTableModel tableModel;
     /**
      * Creates new form Service
      */
     public ManageService() {
         initComponents();
+        this.serviceController = new ServiceController();
+        this.tableModel = (DefaultTableModel) tblDichVu.getModel();
+    }
+    
+    private void loadTableData() {
+        tableModel.setRowCount(0); // Xóa tất cả các hàng cũ
+        try {
+            List<Service> list = serviceController.getAllServices(); // Sửa hàm
+            
+            if (list.isEmpty()) {
+                // Tùy chọn: có thể bỏ thông báo này nếu bạn không muốn
+                // JOptionPane.showMessageDialog(this, "Không tìm thấy dịch vụ nào.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            
+            for (Service dv : list) { // Sửa model
+                tableModel.addRow(new Object[]{
+                    dv.getMaDichVu(),
+                    dv.getTenDichVu(),
+                    dv.getChiPhi()
+                });
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi tải dữ liệu bảng: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void clearForm() {
+        txtMaDichVu.setText("");
+        txtTenDichVu.setText("");
+        txtChiPhi.setText("");
+        tblDichVu.clearSelection(); // Bỏ chọn hàng trên bảng
+        
+        // Mở khóa ô Mã Dịch Vụ (để có thể "Thêm" mới)
+        txtMaDichVu.setEditable(true); 
     }
 
     /**
@@ -26,19 +70,264 @@ public class ManageService extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtMaDichVu = new javax.swing.JTextField();
+        txtTenDichVu = new javax.swing.JTextField();
+        txtChiPhi = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDichVu = new javax.swing.JTable();
+
+        jPanel1.setBackground(new java.awt.Color(45, 55, 72));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dịch Vụ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 24), new java.awt.Color(255, 255, 255))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Mã dịch vụ");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Tên dịch vụ");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Chi phí");
+
+        txtMaDichVu.setBackground(new java.awt.Color(74, 85, 104));
+        txtMaDichVu.setToolTipText("");
+
+        txtTenDichVu.setBackground(new java.awt.Color(74, 85, 104));
+        txtTenDichVu.setToolTipText("");
+
+        txtChiPhi.setBackground(new java.awt.Color(74, 85, 104));
+        txtChiPhi.setToolTipText("");
+
+        jButton1.setBackground(new java.awt.Color(56, 178, 172));
+        jButton1.setText("Thêm");
+        jButton1.setToolTipText("");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(56, 178, 172));
+        jButton2.setText("Hiện thị");
+        jButton2.setToolTipText("");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(56, 178, 172));
+        jButton3.setText("Xóa");
+        jButton3.setToolTipText("");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        tblDichVu.setBackground(new java.awt.Color(74, 85, 104));
+        tblDichVu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Mã dịch vụ", "Tên dịch vụ", "Chi phí"
+            }
+        ));
+        tblDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblDichVuMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblDichVu);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtMaDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTenDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtChiPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(142, 142, 142)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap(285, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
+        );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtChiPhi, txtMaDichVu, txtTenDichVu});
+
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMaDichVu)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTenDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtChiPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
+        );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtChiPhi, txtMaDichVu, txtTenDichVu});
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            String maDV = txtMaDichVu.getText();
+            String tenDV = txtTenDichVu.getText();
+            
+            // 1. Kiểm tra dữ liệu nhập
+            if (maDV.isEmpty() || tenDV.isEmpty() || txtChiPhi.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin.", "Lỗi", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            // 2. Chuyển đổi Chi Phí sang số
+            double chiPhi = Double.parseDouble(txtChiPhi.getText());
+            
+            // 3. Tạo đối tượng Model
+            Service dv = new Service(maDV, tenDV, chiPhi);
+            
+            // 4. Gọi Controller
+            int kq = serviceController.insert(dv);
+            
+            if (kq > 0) {
+                JOptionPane.showMessageDialog(this, "Thêm dịch vụ thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                loadTableData(); // Tải lại bảng
+                clearForm();     // Xóa trắng form
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm thất bại. Mã dịch vụ có thể đã tồn tại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Chi phí phải là một con số (ví dụ: 250000).", "Lỗi định dạng", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi thêm: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        loadTableData();
+        clearForm();
+        JOptionPane.showMessageDialog(this, "Đã làm mới dữ liệu.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // 1. Kiểm tra xem người dùng đã chọn hàng nào chưa
+        int selectedRow = tblDichVu.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dịch vụ từ bảng để xóa.", "Chưa chọn", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // 2. Lấy Mã Dịch Vụ từ hàng đã chọn (Cột 0)
+        String maDV = (String) tableModel.getValueAt(selectedRow, 0);
+        
+        // 3. Xác nhận
+        int confirm = JOptionPane.showConfirmDialog(this, 
+                "Bạn có chắc chắn muốn xóa dịch vụ '" + maDV + "' không?", 
+                "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
+                
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                // 4. Gọi Controller
+                int kq = serviceController.delete(maDV);
+                if (kq > 0) {
+                    JOptionPane.showMessageDialog(this, "Xóa thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                    loadTableData(); // Tải lại bảng
+                    clearForm();     // Xóa trắng form
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa thất bại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (Exception e) {
+                 JOptionPane.showMessageDialog(this, "Lỗi khi xóa: " + e.getMessage() + "\n(Dịch vụ này có thể đang được sử dụng trong một hồ sơ.)", "Lỗi CSDL", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void tblDichVuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDichVuMousePressed
+        int row = tblDichVu.getSelectedRow();
+        if (row >= 0) {
+            // Lấy dữ liệu từ TableModel
+            String maDV = tableModel.getValueAt(row, 0).toString();
+            String tenDV = tableModel.getValueAt(row, 1).toString();
+            String chiPhi = tableModel.getValueAt(row, 2).toString();
+            
+            // Đổ dữ liệu lên các ô nhập
+            txtMaDichVu.setText(maDV);
+            txtTenDichVu.setText(tenDV);
+            txtChiPhi.setText(chiPhi);
+            
+            // Khóa ô Mã Dịch Vụ lại, không cho sửa Khóa chính
+            txtMaDichVu.setEditable(false);
+        }
+    }//GEN-LAST:event_tblDichVuMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblDichVu;
+    private javax.swing.JTextField txtChiPhi;
+    private javax.swing.JTextField txtMaDichVu;
+    private javax.swing.JTextField txtTenDichVu;
     // End of variables declaration//GEN-END:variables
 }
