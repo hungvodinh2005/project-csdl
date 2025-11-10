@@ -3,25 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/git/BTLJAVA/src/views/ManageDiagnose.java</file>
-            <file>file:/D:/git/BTLJAVA/src/views/Login.java</file>
-            <file>file:/D:/git/BTLJAVA/src/connection/JDBCUtil.java</file>
-            <file>file:/D:/git/BTLJAVA/src/views/Home.java</file>
-            <file>file:/D:/git/BTLJAVA/src/views/ManageDoctor.java</file>
-            <file>file:/D:/git/BTLJAVA/src/views/ManagePatients.java</file>
-            <file>file:/D:/git/BTLJAVA/src/views/ManageRecords.java</file>
-            <file>file:/D:/git/BTLJAVA/src/views/ManageSchedule.java</file>
-            <file>file:/D:/git/BTLJAVA/src/views/ManageService.java</file>
-            <file>file:/D:/git/BTLJAVA/src/views/Report.java</file>
-            <file>file:/D:/git/BTLJAVA/src/connection/connectMysql.java</file>
-            <file>file:/D:/git/BTLJAVA/src/controllers/MedicalRecordController.java</file>
-            <file>file:/D:/git/BTLJAVA/src/models/Diagnose.java</file>
-            <file>file:/D:/git/BTLJAVA/src/models/MedicalRecord.java</file>
-            <file>file:/D:/git/BTLJAVA/src/controllers/DoctorController.java</file>
-            <file>file:/D:/git/BTLJAVA/src/controllers/PatientController.java</file>
-            <file>file:/D:/git/BTLJAVA/src/controllers/ControllerService.java</file>
-            <file>file:/D:/git/BTLJAVA/src/models/ChiDinhDichVu.java</file>
-            <file>file:/D:/git/BTLJAVA/src/controllers/ChiDinhCon.java</file>
+            <file>file:/C:/Users/phams/Desktop/code/Project/project-csdl/src/views/ManageService.java</file>
+            <file>file:/C:/Users/phams/Desktop/code/Project/project-csdl/src/views/ManagePrescription.java</file>
+            <file>file:/C:/Users/phams/Desktop/code/Project/project-csdl/src/views/ManageDoctor.java</file>
+            <file>file:/C:/Users/phams/Desktop/code/Project/project-csdl/src/views/ManageDiagnose.java</file>
+            <file>file:/C:/Users/phams/Desktop/code/Project/project-csdl/src/controllers/PrescriptionController.java</file>
         </group>
     </open-files>
 </project-private>
