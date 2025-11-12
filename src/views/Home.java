@@ -40,7 +40,7 @@ public class Home {
         JButton btnTracking = new JButton("Theo dõi điều trị");
         JButton btnMedicine = new JButton("Kho thuốc");
         JButton btnService = new JButton("Dịch vụ y tế");
-        JButton btnReport = new JButton("Báo cáo");
+        JButton btnReport = new JButton("Thanh Toán");
         JButton btnLogout = new JButton("Đăng xuất");
         
         JButton[] buttons = {btnPatients, btnDoctors, btnSchedule, btnDiagnose, btnRecords,

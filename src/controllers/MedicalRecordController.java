@@ -7,7 +7,7 @@ package controllers;
 import connection.JDBCUtil;
 import models.MedicalRecord;
 import java.sql.*;
-import java.time.LocalDate;
+import java.time.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -101,4 +101,5 @@ public class MedicalRecordController {
         MedicalRecordController mrc = new MedicalRecordController();
         System.out.println(mrc.nextRecordID());
     }
+
 }
