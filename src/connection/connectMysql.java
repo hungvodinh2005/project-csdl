@@ -3,23 +3,27 @@ package connection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
 public class connectMysql {
-    private Connection connection;
-    private static final String URL = "jdbc:mysql://localhost:3306/csdl?useSSL=false&serverTimezone=UTC";
-    private String user="root";
-    private String password="Quang@0211";
-    public  Connection  getConnection() throws SQLException, ClassNotFoundException{
-       try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn=DriverManager.getConnection(URL,user,password);
+    private static final String URL = 
+        "jdbc:mysql://localhost:3306/csdl?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+    private static final String USER = "root";
+    private static final String PASSWORD = "Son0945@";
+
+    public static Connection getConnection() {
+        Connection conn = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("✅ Kết nối MySQL thành công!");
+        } catch (ClassNotFoundException e) {
+            System.out.println("❌ Không tìm thấy Driver MySQL!");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("❌ Lỗi kết nối Database!");
+            e.printStackTrace();
+        }
         return conn;
-    }catch(SQLException e){
-         System.out.println(" Không tìm thấy Driver MySQL!");
-            e.printStackTrace();
-    }catch(ClassNotFoundException e){
-         System.out.println("Lỗi kết nối Database!");
-            e.printStackTrace();
     }
-    return null;
-}
 }

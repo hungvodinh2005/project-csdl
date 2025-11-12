@@ -5,6 +5,7 @@ import models.Prescription;
 import models.Thuoc;
 import models.ChiTietDonThuoc;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -368,5 +369,4 @@ public class PrescriptionController {
         }
         return kq;
     }
-    
 }

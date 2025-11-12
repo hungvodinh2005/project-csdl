@@ -1,3 +1,7 @@
 /nbproject/private/
 /build/
+<<<<<<< HEAD
+-e "/build/\n/nbproject/private/\n*.class" 
+=======
 /dist/
+>>>>>>> 956bb6e808a17796e0e352cbb7063ecb7261d3d4
