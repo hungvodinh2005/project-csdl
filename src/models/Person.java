@@ -1,46 +1,83 @@
 package models;
+
 public class Person {
-    private String idCard;      // CCCD
-    private String fullName;    // HoTen
-    private java.sql.Date birthDate;  // NgaySinh
-    private String gender;      // GioiTinh
-    private String phone;       // SDT
-    private String address;     // DiaChi
-    private String email;       // Email
+
+    private String cccd;           // cccd
+    private String hoten;          // hoten
+    private java.sql.Date ngaysinh; // ngaysinh
+    private String mabhyt;         // mabhyt
+    private String sdt;            // sdt
+    private String email;          // email
+    private String diachi;         // diachi
 
     // Constructors
     public Person() {}
 
-    public Person(String idCard, String fullName, java.sql.Date birthDate,
-                  String gender, String phone, String address, String email) {
-        this.idCard = idCard;
-        this.fullName = fullName;
-        this.birthDate = birthDate;
-        this.gender = gender;
-        this.phone = phone;
-        this.address = address;
+    public Person(String cccd, String hoten, java.sql.Date ngaysinh,
+                  String mabhyt, String sdt, String email, String diachi) {
+        this.cccd = cccd;
+        this.hoten = hoten;
+        this.ngaysinh = ngaysinh;
+        this.mabhyt = mabhyt;
+        this.sdt = sdt;
         this.email = email;
+        this.diachi = diachi;
     }
 
     // Getters & Setters
-    public String getIdCard() { return idCard; }
-    public void setIdCard(String idCard) { this.idCard = idCard; }
+    public String getCccd() {
+        return cccd;
+    }
 
-    public String getFullName() { return fullName; }
-    public void setFullName(String fullName) { this.fullName = fullName; }
+    public void setCccd(String cccd) {
+        this.cccd = cccd;
+    }
 
-    public java.sql.Date getBirthDate() { return birthDate; }
-    public void setBirthDate(java.sql.Date birthDate) { this.birthDate = birthDate; }
+    public String getHoten() {
+        return hoten;
+    }
 
-    public String getGender() { return gender; }
-    public void setGender(String gender) { this.gender = gender; }
+    public void setHoten(String hoten) {
+        this.hoten = hoten;
+    }
 
-    public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
+    public java.sql.Date getNgaysinh() {
+        return ngaysinh;
+    }
 
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
+    public void setNgaysinh(java.sql.Date ngaysinh) {
+        this.ngaysinh = ngaysinh;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public String getMabhyt() {
+        return mabhyt;
+    }
+
+    public void setMabhyt(String mabhyt) {
+        this.mabhyt = mabhyt;
+    }
+
+    public String getSdt() {
+        return sdt;
+    }
+
+    public void setSdt(String sdt) {
+        this.sdt = sdt;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getDiachi() {
+        return diachi;
+    }
+
+    public void setDiachi(String diachi) {
+        this.diachi = diachi;
+    }
 }

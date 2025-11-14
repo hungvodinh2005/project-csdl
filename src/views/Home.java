@@ -33,6 +33,7 @@ public class Home {
         
         // Các nút điều hướng
         JButton btnPatients = new JButton("Bệnh nhân");
+        JButton btnPerson = new JButton("Thông tin cá nhân");
         JButton btnDoctors = new JButton("Bác sĩ");
         JButton btnSchedule = new JButton("Lịch khám");
         JButton btnDiagnose = new JButton("Khám bệnh");
@@ -40,10 +41,10 @@ public class Home {
         JButton btnTracking = new JButton("Theo dõi điều trị");
         JButton btnMedicine = new JButton("Kho thuốc");
         JButton btnService = new JButton("Dịch vụ y tế");
-        JButton btnReport = new JButton("Thanh Toán");
+        JButton btnReport = new JButton("Báo cáo");
         JButton btnLogout = new JButton("Đăng xuất");
         
-        JButton[] buttons = {btnPatients, btnDoctors, btnSchedule, btnDiagnose, btnRecords,
+        JButton[] buttons = {btnPatients,btnPerson, btnDoctors, btnSchedule, btnDiagnose, btnRecords,
                              btnTracking, btnMedicine, btnService, btnReport, btnLogout};
         
         for (JButton b : buttons) {
@@ -54,7 +55,8 @@ public class Home {
         }
 
         // Thêm panel con (chỉ cần có class đó)
-        center.add(new ManagePatients(), "Patients");
+        
+        center.add(new ManagePerson(), "Person");
         center.add(new ManageDoctor(), "Doctor");
         center.add(new ManageSchedule(), "Schedule");
         center.add(new ManageDiagnose(), "Diagnose");
@@ -66,6 +68,7 @@ public class Home {
 
         // Sự kiện chuyển trang
         btnPatients.addActionListener(e -> cardLayout.show(center, "Patients"));
+        btnPerson.addActionListener(e -> cardLayout.show(center, "Person"));
         btnDoctors.addActionListener(e -> cardLayout.show(center, "Doctor"));
         btnSchedule.addActionListener(e -> cardLayout.show(center, "Schedule"));
         btnDiagnose.addActionListener(e -> cardLayout.show(center, "Diagnose"));
