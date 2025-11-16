@@ -35,7 +35,7 @@ public class Home {
         JButton btnPatients = new JButton("Bệnh nhân");
         JButton btnPerson = new JButton("Thông tin cá nhân");
         JButton btnDoctors = new JButton("Bác sĩ");
-        JButton btnSchedule = new JButton("Lịch khám");
+        
         JButton btnDiagnose = new JButton("Khám bệnh");
         JButton btnRecords = new JButton("Hồ sơ bệnh án");
         JButton btnTracking = new JButton("Theo dõi điều trị");
@@ -44,7 +44,7 @@ public class Home {
         JButton btnReport = new JButton("Báo cáo");
         JButton btnLogout = new JButton("Đăng xuất");
         
-        JButton[] buttons = {btnPatients,btnPerson, btnDoctors, btnSchedule, btnDiagnose, btnRecords,
+        JButton[] buttons = {btnPatients,btnPerson, btnDoctors, btnDiagnose, btnRecords,
                              btnTracking, btnMedicine, btnService, btnReport, btnLogout};
         
         for (JButton b : buttons) {
@@ -55,10 +55,10 @@ public class Home {
         }
 
         // Thêm panel con (chỉ cần có class đó)
-        
+        center.add(new ManagePatient(), "Patient");
         center.add(new ManagePerson(), "Person");
         center.add(new ManageDoctor(), "Doctor");
-        center.add(new ManageSchedule(), "Schedule");
+       
         center.add(new ManageDiagnose(), "Diagnose");
         center.add(new ManageRecords(), "Records");
 //        center.add(new ManageUpdateStatus(), "Tracking");
@@ -67,10 +67,10 @@ public class Home {
         center.add(new ManagePrescription(), "Prescription");
 
         // Sự kiện chuyển trang
-        btnPatients.addActionListener(e -> cardLayout.show(center, "Patients"));
+        btnPatients.addActionListener(e -> cardLayout.show(center, "Patient"));
         btnPerson.addActionListener(e -> cardLayout.show(center, "Person"));
         btnDoctors.addActionListener(e -> cardLayout.show(center, "Doctor"));
-        btnSchedule.addActionListener(e -> cardLayout.show(center, "Schedule"));
+        
         btnDiagnose.addActionListener(e -> cardLayout.show(center, "Diagnose"));
         btnRecords.addActionListener(e -> cardLayout.show(center, "Records"));
         btnTracking.addActionListener(e -> cardLayout.show(center, "Tracking"));

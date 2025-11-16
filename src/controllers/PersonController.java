@@ -202,4 +202,24 @@ public class PersonController {
 
         return list;
     }
+    public String getHoTenByIdCard(String cccd) {
+        String sql = "SELECT hoten FROM nguoi WHERE cccd = ?";
+        String hoTen = null;
+
+        try (Connection conn = new connectMysql().getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, cccd);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    hoTen = rs.getString("hoten");
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return hoTen;
+    }
 }

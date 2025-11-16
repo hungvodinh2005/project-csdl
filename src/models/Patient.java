@@ -1,38 +1,48 @@
 package models;
 public class Patient {
-    private String patientId;   // MaBenhNhan
-    private String idCard;      // CCCD
-    private String guardianId;  // NGH_CCCD
-    private String medicalHistory; // TienSuBenhAn
+   private String patientId;      // mabenhnhan
+    private String idCard;         // cccd
+    private String guardianId;     // manguoigiamho
+    private String maBhyt;         // mabhyt
 
-    public Patient() {}
-
-    public Patient(String patientId, String idCard, String guardianId, String medicalHistory) {
+    public Patient(String patientId, String idCard, String guardianId, String maBhyt) {
         this.patientId = patientId;
         this.idCard = idCard;
         this.guardianId = guardianId;
-        this.medicalHistory = medicalHistory;
+        this.maBhyt = maBhyt;
+    }
+    public Patient(){};
+    public String getPatientId() {
+        return patientId;
     }
 
-    public String getPatientId() { return patientId; }
-    public void setPatientId(String patientId) { this.patientId = patientId; }
-
-    public String getIdCard() { return idCard; }
-    public void setIdCard(String idCard) { this.idCard = idCard; }
-
-    public String getGuardianId() { return guardianId; }
-    public void setGuardianId(String guardianId) { this.guardianId = guardianId; }
-
-    public String getMedicalHistory() { return medicalHistory; }
-    public void setMedicalHistory(String medicalHistory) { this.medicalHistory = medicalHistory; }
-
-     private String hoTen; // Khai báo biến
-
-    public String getHoTen() { // Hàm get
-        return hoTen;
+    public String getIdCard() {
+        return idCard;
     }
 
-    public void setHoTen(String hoTen) { // Hàm set
-        this.hoTen = hoTen;
+    public String getGuardianId() {
+        return guardianId;
     }
+
+    public String getMaBhyt() {
+        return maBhyt;
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
+    public void setGuardianId(String guardianId) {
+        this.guardianId = guardianId;
+    }
+
+    public void setMaBhyt(String maBhyt) {
+        this.maBhyt = maBhyt;
+    }
+    
+    
 }
