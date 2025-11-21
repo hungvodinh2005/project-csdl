@@ -20,6 +20,10 @@
             <file>file:/C:/Users/DINHHUNG/Desktop/New%20folder%20(4)/project-csdl/src/models/LicSuKham.java</file>
             <file>file:/C:/Users/DINHHUNG/Desktop/New%20folder%20(4)/project-csdl/src/models/Guardian.java</file>
             <file>file:/C:/Users/DINHHUNG/Desktop/New%20folder%20(4)/project-csdl/src/models/Prescription.java</file>
+            <file>file:/C:/Users/DINHHUNG/Desktop/New%20folder%20(4)/project-csdl/src/connection/connectMysql.java</file>
+            <file>file:/C:/Users/DINHHUNG/Desktop/New%20folder%20(4)/project-csdl/src/connection/JDBCUtil.java</file>
+            <file>file:/C:/Users/DINHHUNG/Desktop/New%20folder%20(4)/project-csdl/src/views/ManageSchedule.java</file>
+            <file>file:/C:/Users/DINHHUNG/Desktop/New%20folder%20(4)/project-csdl/src/views/ManageService.java</file>
         </group>
     </open-files>
 </project-private>
