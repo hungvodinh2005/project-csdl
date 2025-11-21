@@ -55,16 +55,19 @@ public class Home {
         }
 
         // Thêm panel con (chỉ cần có class đó)
+        
+        ManagePrescription managePrescription=new ManagePrescription();
+        ManageDiagnose manageDiagnose=new ManageDiagnose(managePrescription);
         center.add(new ManagePatient(), "Patient");
         center.add(new ManagePerson(), "Person");
         center.add(new ManageDoctor(), "Doctor");
        
-        center.add(new ManageDiagnose(), "Diagnose");
+        center.add(manageDiagnose, "Diagnose");
         center.add(new ManageRecords(), "Records");
 //        center.add(new ManageUpdateStatus(), "Tracking");
         center.add(new ManageService(), "Service");
         center.add(new Report(), "Report");
-        center.add(new ManagePrescription(), "Prescription");
+        center.add(managePrescription, "Prescription");
 
         // Sự kiện chuyển trang
         btnPatients.addActionListener(e -> cardLayout.show(center, "Patient"));

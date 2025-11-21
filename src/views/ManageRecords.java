@@ -17,12 +17,13 @@ import models.MedicalRecord;
  * @author DINHHUNG
  */
 public class ManageRecords extends javax.swing.JPanel {
-
+    
     /**
      * Creates new form ManageRecords
      */
     public ManageRecords() {
         initComponents();
+        
     }
 
     /**

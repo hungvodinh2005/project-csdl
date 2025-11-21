@@ -91,7 +91,7 @@ public class ManagePrescription extends javax.swing.JPanel {
         }
     }
     
-    private void loadInitialData() {
+    public void loadInitialData() {
         try {
             // 1. Tải Mã Đơn và Ngày Kê Đơn (Tạo mới)
             txtMaDon.setText(prescriptionController.nextPrescriptionID());
@@ -635,6 +635,7 @@ public class ManagePrescription extends javax.swing.JPanel {
             javax.swing.JOptionPane.showMessageDialog(this, "Lỗi khi thêm: " + e.getMessage(), "Lỗi", javax.swing.JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
+        loadInitialData();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void txtNgayKeDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNgayKeDonActionPerformed

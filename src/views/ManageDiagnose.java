@@ -26,13 +26,13 @@ import models.MedicalRecord;
  * @author DINHHUNG
  */
 public class ManageDiagnose extends javax.swing.JPanel {
-
+    private ManagePrescription managePrescription;
     /**
      * Creates new form ManageDiagnose
      */
-    public ManageDiagnose() {
+    public ManageDiagnose(ManagePrescription managePrescription) {
         this.maBn = this.maBS = this.maHS="";
-        
+        this.managePrescription=managePrescription;
         this.maHS = mrc.nextRecordID();
         initComponents();
         
@@ -283,7 +283,7 @@ HashMap<String, String> map;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void diagnoseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diagnoseActionPerformed
-        // TODO add your handling code here:
+       
         String mabacsi = this.maBacSi.getText();
         
         
@@ -302,6 +302,7 @@ HashMap<String, String> map;
         
         System.out.println("then thanh cong tren layout");
         this.maHS=mahoso;
+        managePrescription.loadInitialData();
     }//GEN-LAST:event_diagnoseActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
@@ -327,6 +328,8 @@ HashMap<String, String> map;
         this.maBN.setText("");
         this.chuanDoan.setText("");
         this.phuongAn.setText("");
+        tenBN.setText("");
+        maBacSi.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
     public static void main(String[] args) {
         
